@@ -1,0 +1,31 @@
+" .vimrc - nothing special here.
+"color elflord
+syntax on
+set ai
+set nu
+set ruler
+set sts=4
+set bs=2
+set noic
+set nowrap
+set sw=4
+set expandtab
+set tabstop=4
+set background=light
+set history=500
+set splitright
+set hlsearch
+set fo-=o
+set fo-=c
+set fo-=r
+color desert
+
+
+" Pathogen support:
+" execute pathogen#infect()
+
+" Dracula theme:
+" packadd! dracula
+" syntax enable
+" colorscheme dracula
+

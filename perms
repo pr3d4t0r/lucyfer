@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# vim: set fileencoding=utf-8:
+
+
+# *** functions ***
+
+function setJupyterWorkspacePermissions {
+    chmod 777 ./work
+
+    mkdir -p ./.jupyter
+    chmod 775 ./.jupyter
+} # setJupyterWorkspacePermissions
+
+
+
+# *** main ***
+
+setJupyterWorkspacePermissions
+
