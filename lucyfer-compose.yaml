@@ -1,4 +1,4 @@
-# (c) Copyright 2022, pr3d4t0r
+# (c) Copyright 2022 pr3d4t0r
 
 # vim: set fileencoding=utf-8:
 
@@ -6,7 +6,7 @@
 version: '3'
 
 services:
-    lucyfer:
+    lucyfer_service:
         container_name: 'lucyfer'
         environment:
             DEVPI_HOST             : '${DEVPI_HOST}'
@@ -27,7 +27,7 @@ services:
             # For LAN availability:
             - 8805:8888
         privileged: true
-        user: 'root:${JUPYTER_LAB_GROUP}'
+        user: 'root:${JUPYTER_LAB_GID}'
         volumes:
             - '${LUCYFER_WORKSPACE}:/home/jovyan'
 
