@@ -120,17 +120,19 @@ dmypy.json
 .pyre/
 
 
-
-
 # Local environment
 
 **.NERD*
 **.bash_*
+**.bashrc
 **.config
 **.gitconfig
 **.jupyter
 **.local
+**.profile
 **.ssh/
+**.viminfo
+**.vimrc
 **/*psd
 **/.conda/*
 **/.cufflinks*
@@ -154,7 +156,6 @@ dmypy.json
 **rclone.conf
 **test.txt
 *swp
-**.viminfo
 
 
 # pycharm

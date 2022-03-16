@@ -19,8 +19,9 @@ RUN             apt-get update && \
                     tree \
                     vim
 
-COPY            resources/_bash_profile /root/.bash_profile
 COPY            resources/_bash_profile /etc/skel/.bash_profile
+COPY            resources/_bash_profile /root/.bash_profile
+COPY            resources/_gitignore /etc/skel/.gitignore
 COPY            resources/_vimrc /etc/skel/.vimrc
 
 

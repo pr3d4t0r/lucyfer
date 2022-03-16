@@ -11,12 +11,11 @@ Jupyter features without having to install any of the Jupyter packages locally.
 
 - Git support
 - `jq`
-- rclone for synchronizing data lakes between host and remote systems
-- ssh
-- tree (file system visualization)
+- `rclone` for synchronizing data lakes between host and remote systems
+- `ssh`
+- `tree` (file system visualization)
 - Vim with NERDTree and other dev tools
 - `pudb`, linters, devpi, `pytest`, `plotly`, and data handling Python tools
-- Blazegraph integration via separate container
 
 Lucyfer also fixes the Conda and `jovyan` (`$NB_USER`) permissions in the 
 Jupyter image and enables `pip` package installation.

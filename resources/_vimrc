@@ -24,8 +24,3 @@ color desert
 " Pathogen support:
 " execute pathogen#infect()
 
-" Dracula theme:
-" packadd! dracula
-" syntax enable
-" colorscheme dracula
-
