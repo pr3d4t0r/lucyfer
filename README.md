@@ -10,6 +10,7 @@ Jupyter features without having to install any of the Jupyter packages locally.
 performance computing prototypes.**
 
 
+---
 ## Features
 
 - Git support
@@ -24,6 +25,7 @@ Lucyfer also fixes the Conda and `jovyan` (`$NB_USER`) permissions in the
 Jupyter image and enables `pip` package installation.
 
 
+---
 ## Benefits
 
 - Coexists with local file system development tools like IDEs or Python
@@ -35,6 +37,7 @@ Jupyter image and enables `pip` package installation.
   deploy a full Linux VM (x86, M-processors)
 
 
+---
 ## Quick start guide
 
 
