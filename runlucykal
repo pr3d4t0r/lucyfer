@@ -72,7 +72,7 @@ export BLAZEGRAPH_DATA=/path/to/data/repository
 Where /path/to/data/repository is the database work area.
 
 EOF
-        export BLAZEGRAPH_DATA="$(pwd)"
+        export BLAZEGRAPH_DATA="$(pwd)/data"
         echo "BLAZEGRAPH_DATA=$BLAZEGRAPH_DATA"
     fi
 
