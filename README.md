@@ -110,7 +110,7 @@ People on Earth named the new star Lucifer, the Morning Star.
 Jupiter became a star thanks to the internal transformation that the cosmic 
 general purpose tool, the Monolith, enabled.
 
-<img src='https://pbs.twimg.com/media/EiWoMBsXgAAv-s2.jpg'>
+<img src='https://spinorlab.files.wordpress.com/2016/11/2010.jpg'>
 
 The `Dockerfille` and Compose files associated with this project enabled an 
 internal transformation of Jupyter to turn it into a better tool.
