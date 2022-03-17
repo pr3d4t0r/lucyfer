@@ -4,10 +4,12 @@
 
 # vim: set fileencoding=utf-8:
 
+set -e
+
 
 # +++ constants +++
 
-LUCYFER_COMPOSE='lucykall-compose.yaml'
+LUCYFER_COMPOSE='lucykal-compose.yaml'
 
 
 # *** functions ***
@@ -33,6 +35,7 @@ assertWorkspaceExists() {
     then
 
 cat <<EOF
+
 The LUCYFER_WORKSPACE environment variable must point at the fully qualified
 path to the working directory where the user intends to store Jupyter notebooks
 and data.  This script links the Jupyter jovyan user $HOME to $LUCYFER_WORKSPACE
@@ -46,7 +49,8 @@ Where /path/to/workspace/dir is your workspace.
 
 EOF
 
-        die "Please correct LUCYFER_WORKSPACE and try again" 3
+        export LUCYFER_WORKSPACE="$(pwd)"
+        echo "LUCYFER_WORKSPACE=$LUCYFER_WORKSPACE"
     fi
 } # assertWorkspaceExists
 
@@ -55,6 +59,7 @@ assertDataRepositoryExists() {
     if [[ -z "$BLAZEGRAPH_DATA" ]]
     then
 cat << EOF
+
 The BLAZEGRAPH_DATA environment variable must point at the fully qualified
 path to the working directory where the user intends to store graph data files.
 This script links /data in the Blazegraph container to $BLAZEGRAPH_DATA for
@@ -67,7 +72,8 @@ export BLAZEGRAPH_DATA=/path/to/data/repository
 Where /path/to/data/repository is the database work area.
 
 EOF
-        die "Please correct BLAZEGRAPH_DATA and try again" 4
+        export BLAZEGRAPH_DATA="$(pwd)"
+        echo "BLAZEGRAPH_DATA=$BLAZEGRAPH_DATA"
     fi
 
     mkdir -p "$BLAZEGRAPH_DATA"
@@ -107,8 +113,12 @@ runJupyterScienceLab() {
     _snuffContainer "lucyfer"
     _snuffContainer "kallisto"
 
+    echo ""
     env | awk '/JUPYTER/ || /HOME/ || /BLAZE/' | sort
     docker-compose -f "$LUCYFER_COMPOSE" up --remove-orphans --no-recreate -d || docker-compose rm -f 
+    sleep 2 
+    docker ps -a | awk 'NR == 1 { print; next; } /lucyfer/ || /kallisto/'
+    docker logs lucyfer 2>&1 | awk -F "?" '/http:/ { gsub("token=", "Lucyfer access token = ", $NF); printf("\n%s\n", $NF); exit(0); }'
 } # runJupyterScienceLab
 
 
