@@ -6,6 +6,9 @@ additional tools into the Jupyter environment while maintaining independence
 from the local system's development tools.  This empowers the user to use all
 Jupyter features without having to install any of the Jupyter packages locally.
 
+**tl;dr:  Lucyfer is a zero-conf, zero-install Python IDE for buiding high
+performance computing prototypes.**
+
 
 ## Features
 
@@ -32,22 +35,27 @@ Jupyter image and enables `pip` package installation.
   deploy a full Linux VM (x86, M-processors)
 
 
-## Installation
+## Quick start guide
 
-Get the image:
 
-```bash
-docker pull pr3d4t0r/lucyfer:latest
+### Pre-requisites
+
+- Docker desktop
+- `wget` for pulling the files off GitHub
+
+
+### Workspace
+
+Open a terminal and create a working directory anywhere in your file system, or
+pick any existing directory.
+
+
+### Deployment
+
+Get the starter files from the Lucyfer project at GitHub and execute the runner:
+
 ```
 
-Add the `runlucyfer` and `lucyfer-compose.yaml` files to your Python project
-working directory (e.g. `$HOME/development/mypacage`):
 
-```
-curl command here
-```
-
-```
-curl command here
 ```
 
