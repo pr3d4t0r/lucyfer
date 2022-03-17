@@ -49,13 +49,40 @@ Jupyter image and enables `pip` package installation.
 Open a terminal and create a working directory anywhere in your file system, or
 pick any existing directory.
 
+```zsh
+mkdir -p ~/development/mywork && 
+cd ~/development/mywork
+```
+
 
 ### Deployment
 
 Get the starter files from the Lucyfer project at GitHub and execute the runner:
 
+```zsh
+wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/lucykal-compose.yaml && \
+wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/runlucykal && \
+wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/README-TOO.ipynb && \
+chmod +x ./runlucykal && \
+./runlucykal && \
+sleep 2 && \
+docker ps -a | awk 'NR == 1 { print; next; } /lucyfer/ || /kallisto/' && \
+docker logs lucyfer 2>&1 | awk -F "?" '/http:/ { gsub("token=", "Access token = ", $NF); print($NF); exit(0); }'
+
+```
+
+Docker displays Lucyfer and Kallisto among all the running containers:
+
+```
+CONTAINER ID   IMAGE                      COMMAND                  CREATED         STATUS         PORTS                    NAMES
+0aad00c6ecdc   pr3d4t0r/lucyfer:latest    "tini -g -- start-no…"   2 seconds ago   Up 2 seconds   0.0.0.0:8805->8888/tcp   lucyfer
+5bbec632c314   lyrasis/blazegraph:2.1.5   "/docker-entrypoint.…"   2 seconds ago   Up 2 seconds   0.0.0.0:8889->8080/tcp   kallisto
+
+Lucyfer access token = 1d156b04af64bded5ed6ca274e90a696cfd6f4be06bfbfc7
 ```
 
 
-```
+### Start the environment
+
+Open this URL in your browser:  <a href='http://localhost:8805' target='_blank'>http://localhost:8805</a>
 
