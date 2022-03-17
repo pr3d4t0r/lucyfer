@@ -82,7 +82,36 @@ Lucyfer access token = 1d156b04af64bded5ed6ca274e90a696cfd6f4be06bfbfc7
 ```
 
 
-### Start the environment
+### Open the development lab
 
 Open this URL in your browser:  <a href='http://localhost:8805' target='_blank'>http://localhost:8805</a>
+
+Enter the Lucyfer access token in the field at the bottom of the page, followed
+by your password so that you can return the Lucyfer lab any time.
+
+
+### Next steps... and get to work!
+
+Open the `README-TOO.ipynb` notebook.  It has live instructions on how to check
+if the database is running and on how to conclude the Lucyfer setup.
+
+
+---
+## Why Lucyfer?
+
+_ALL THESE WORLDS ARE YOURS -- EXCEPT EUROPA.  ATTEMPT NO LANDING THERE._
+
+HAL-9000 transmitted that warning to Earth after fusing with the Monolith and
+David Bowman, the Star Child, before Jupiter attained critical mass and
+exploded to become a star.
+
+People on Earth named the new star Lucifer, the Morning Star.
+
+Jupiter became a star thanks to the internal transformation that the cosmic 
+general purpose tool, the Monolith, enabled.
+
+<img src='https://pbs.twimg.com/media/EiWoMBsXgAAv-s2.jpg'>
+
+The `Dockerfille` and Compose files associated with this project enabled an 
+internal transformation of Jupyter to turn it into a better tool.
 
