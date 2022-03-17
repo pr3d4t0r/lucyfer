@@ -64,10 +64,7 @@ wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/lucykal-compose.y
 wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/runlucykal && \
 wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/README-TOO.ipynb && \
 chmod +x ./runlucykal && \
-./runlucykal && \
-sleep 2 && \
-docker ps -a | awk 'NR == 1 { print; next; } /lucyfer/ || /kallisto/' && \
-docker logs lucyfer 2>&1 | awk -F "?" '/http:/ { gsub("token=", "Access token = ", $NF); print($NF); exit(0); }'
+./runlucykal 
 
 ```
 
