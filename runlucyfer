@@ -7,7 +7,7 @@
 
 # +++ constants +++
 
-LUCYFER_COMPOSE='lucykall-compose.yaml'
+LUCYFER_COMPOSE='lucyfer-compose.yaml'
 
 
 # *** functions ***
@@ -49,29 +49,6 @@ EOF
         die "Please correct LUCYFER_WORKSPACE and try again" 3
     fi
 } # assertWorkspaceExists
-
-
-assertDataRepositoryExists() {
-    if [[ -z "$BLAZEGRAPH_DATA" ]]
-    then
-cat << EOF
-The BLAZEGRAPH_DATA environment variable must point at the fully qualified
-path to the working directory where the user intends to store graph data files.
-This script links /data in the Blazegraph container to $BLAZEGRAPH_DATA for
-storing database configuration and data.
-
-From the command line, do:
-
-export BLAZEGRAPH_DATA=/path/to/data/repository
-
-Where /path/to/data/repository is the database work area.
-
-EOF
-        die "Please correct BLAZEGRAPH_DATA and try again" 4
-    fi
-
-    mkdir -p "$BLAZEGRAPH_DATA"
-} # assertDataRepositoryExists
 
 
 setOwnership() {
@@ -117,7 +94,6 @@ runJupyterScienceLab() {
 assertDockerIsAvailable
 assertDockerComposeFileExists
 assertWorkspaceExists
-assertDataRepositoryExists
 setOwnership
 runJupyterScienceLab
 
