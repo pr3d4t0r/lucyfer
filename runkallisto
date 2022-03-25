@@ -9,7 +9,7 @@ set -e
 
 # +++ constants +++
 
-LUCYFER_COMPOSE='lucykal-compose.yaml'
+KALLISTO_COMPOSE='kallisto-compose.yaml'
 
 
 # *** functions ***
@@ -20,39 +20,31 @@ die() {
 } # die
 
 
+assertDockerServiceIsRunning() {
+    local uname=$(uname)
+    local message="Docker daemon not running"
+
+    case "$uname" in
+        "Darwin")
+            [[ -n $(ps aux | awk '/Docker Desktop\.app/') ]] || die "$message" 4
+            ;;
+        "Linux")
+            die "Linux not supported yet" 6
+            ;;
+        *)
+            die "$uname not supported" 3
+    esac
+} # assertDockerServiceIsRunning
+
+
 assertDockerIsAvailable() {
     which docker-compose > /dev/null || die "docker-compose unavailable or not in path" 1
 } # assertDockerIsAvailable
 
 
 assertDockerComposeFileExists() {
-    [[ -e "$LUCYFER_COMPOSE" ]] || die "$LUCYFER_COMPOSE is not present in pwd == $(pwd)" 2
+    [[ -e "$KALLISTO_COMPOSE" ]] || die "$KALLISTO_COMPOSE is not present in pwd == $(pwd)" 2
 } # assertDockerComposeFileExists
-
-
-assertWorkspaceExists() {
-    if [[ -z "$LUCYFER_WORKSPACE" ]]
-    then
-
-cat <<EOF
-
-The LUCYFER_WORKSPACE environment variable must point at the fully qualified
-path to the working directory where the user intends to store Jupyter notebooks
-and data.  This script links the Jupyter jovyan user $HOME to $LUCYFER_WORKSPACE
-for storing state, data, and notebooks.
-
-From the command line, do:
-
-export LUCYFER_WORKSPACE=/path/to/workspace/dir
-
-Where /path/to/workspace/dir is your workspace.
-
-EOF
-
-        export LUCYFER_WORKSPACE="$(pwd)"
-        echo "LUCYFER_WORKSPACE=$LUCYFER_WORKSPACE"
-    fi
-} # assertWorkspaceExists
 
 
 assertDataRepositoryExists() {
@@ -92,8 +84,6 @@ setOwnership() {
     # kinda suck.
     export BLAZEGRAPH_GID=$(id -g)
     export BLAZEGRAPH_UID=$(id -u)
-    export JUPYTER_LAB_GID=$(id -g)
-    export JUPYTER_LAB_UID=$(id -u)
 } # setOwnership
 
 
@@ -110,12 +100,11 @@ _snuffContainer() {
 
 
 runJupyterScienceLab() {
-    _snuffContainer "lucyfer"
     _snuffContainer "kallisto"
 
     echo ""
     env | awk '/JUPYTER/ || /HOME/ || /BLAZE/' | sort
-    docker-compose -f "$LUCYFER_COMPOSE" up --remove-orphans --no-recreate -d || docker-compose rm -f 
+    docker-compose -f "$KALLISTO_COMPOSE" up --remove-orphans --no-recreate -d || docker-compose rm -f 
     sleep 2 
     docker ps -a | awk 'NR == 1 { print; next; } /lucyfer/ || /kallisto/'
     docker logs lucyfer 2>&1 | awk -F "?" '/http:/ { gsub("token=", "Lucyfer access token = ", $NF); printf("\n%s\n", $NF); exit(0); }'
@@ -124,9 +113,9 @@ runJupyterScienceLab() {
 
 # *** main ***
 
+assertDockerServiceIsRunning
 assertDockerIsAvailable
 assertDockerComposeFileExists
-assertWorkspaceExists
 assertDataRepositoryExists
 setOwnership
 runJupyterScienceLab

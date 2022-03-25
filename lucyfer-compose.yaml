@@ -8,6 +8,8 @@ version: '3'
 services:
     lucyfer_service:
         container_name: 'lucyfer'
+        depends_on:
+            - kallisto_service
         environment:
             DEVPI_HOST             : '${DEVPI_HOST}'
             GRANT_SUDO             : 'yes'
@@ -30,4 +32,16 @@ services:
         user: 'root:${JUPYTER_LAB_GID}'
         volumes:
             - '${LUCYFER_WORKSPACE}:/home/jovyan'
+
+    kallisto_service:
+        container_name: 'kallisto'
+        environment:
+            BLAZEGRAPH_UID: '${BLAZEGRAPH_UID}'
+            BLAZEGRAPH_GID: '${BLAZEGRAPH_GID}'
+        image: 'lyrasis/blazegraph:2.1.5'
+        ports:
+            - 8889:8080
+        privileged: true
+        volumes:
+            - '${BLAZEGRAPH_DATA}:/data'
 
