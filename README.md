@@ -30,11 +30,12 @@ Jupyter image and enables `pip` package installation.
 
 - Coexists with local file system development tools like IDEs or Python
   virtual environments
-- Run experiments against the local code
+- Run experiments using local code against remote data
 - Develop production-ready modules and packages from within the Jupyter/Lucyfer
   environment as part of the DevOps process
 - Develop and test on macOS and Linux from the same machine without having to
   deploy a full Linux VM (x86, M-processors)
+- Access AWS data lakes without making local copies of remote data
 
 
 ---
@@ -63,11 +64,11 @@ cd ~/development/mywork
 Get the starter files from the Lucyfer project at GitHub and execute the runner:
 
 ```zsh
-wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/lucykal-compose.yaml && \
-wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/runlucykal && \
+wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/lucyfer-compose.yaml && \
+wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/runlucyfer && \
 wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/README-TOO.ipynb && \
-chmod +x ./runlucykal && \
-./runlucykal 
+chmod +x ./runlucyfer && \
+./runlucyfer 
 
 ```
 
