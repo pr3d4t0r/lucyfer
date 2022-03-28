@@ -1,7 +1,9 @@
 devpi-client
+graph-notebook
 jupyter_contrib_nbextensions
 jupyter_nbextensions_configurator
-pudb
+markupsafe==2.0.1
+pudb==2020.1
 pyflakes
 pytest 
-
+rdflib==5.0.0

@@ -1,4 +1,4 @@
-# lucyfer
+# Lucyfer
 
 Lucyfer is a specialization of the official [Jupyter Datascience Notebook Docker
 image](https://hub.docker.com/r/jupyter/datascience-notebook/tags/) that brings
@@ -114,4 +114,14 @@ general purpose tool, the Monolith, enabled.
 
 The `Dockerfille` and Compose files associated with this project enabled an 
 internal transformation of Jupyter to turn it into a better tool.
+
+
+---
+## 3rd-party licensing information
+
+Lucyfer integrates with the <a href='https://github.com/aws/graph-notebook'
+target='_blank'>AWS graph-notebook</a>, licensed under <a href='https://github.com/aws/graph-notebook/blob/main/LICENSE' target='_blank'>
+Apache 2</a>.  The Lucyfer Dockerfile pulls the corresponding graph-notebook
+Python packages and Jupyter extensions into the Lucyfer image, but does not 
+modify any of the code.
 
