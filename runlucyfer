@@ -133,7 +133,7 @@ runJupyterScienceLab() {
     echo ""
     env | awk '/JUPYTER/ || /HOME/ || /BLAZE/' | sort
     docker-compose -f "$LUCYFER_COMPOSE" up --remove-orphans --no-recreate -d || docker-compose rm -f 
-    sleep 2 
+    sleep 10 # TODO: replace with an actual check to see if the container started/is healthy
     docker ps -a | awk 'NR == 1 { print; next; } /lucyfer/ || /kallisto/'
     docker logs lucyfer 2>&1 | awk -F "?" '/http:/ { gsub("token=", "Lucyfer access token = ", $NF); printf("\n%s\n", $NF); exit(0); }'
 } # runJupyterScienceLab
