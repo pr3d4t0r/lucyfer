@@ -39,6 +39,8 @@ RUN             jupyter nbextension install --py --sys-prefix graph_notebook.wid
                 python -m graph_notebook.static_resources.install && \
                 python -m graph_notebook.nbextensions.install
 
+
+
 RUN             jupyter lab clean --all && \
                 jupyter lab build --debug --minimize=False
                 

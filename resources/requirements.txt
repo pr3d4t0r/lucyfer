@@ -1,9 +1,12 @@
 devpi-client
 graph-notebook
+jinja2>=3.0.3
 jupyter_contrib_nbextensions
 jupyter_nbextensions_configurator
 markupsafe==2.0.1
+nbconvert>=6.4.4
 pudb==2020.1
 pyflakes
 pytest 
 rdflib==5.0.0
+tornado>=6.1.0
