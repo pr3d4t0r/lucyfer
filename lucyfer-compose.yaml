@@ -8,6 +8,7 @@ version: '3'
 services:
     lucyfer_service:
         container_name: 'lucyfer'
+        cpus: 4
 #         depends_on:
 #             - kallisto_service
         environment:
@@ -16,6 +17,7 @@ services:
             JUPYTER_LAB_ENABLE     : 'yes'
             PIP_TRUSTED_HOST       : '${PIP_TRUSTED_HOST}'
         image: 'pr3d4t0r/lucyfer:latest'
+        mem_reservation: 4G
         ports:
             # *****************************************************************
             # Important:  the IP address binding depends on the host's 
