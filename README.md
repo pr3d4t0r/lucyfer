@@ -27,6 +27,15 @@ Lucyfer also fixes the Conda and `jovyan` (`$NB_USER`) permissions in the
 Jupyter image and enables `pip` package installation.
 
 
+### Important
+
+The `lucyfer` image is a specialization of `jupyter/datascience-notebook` and
+runs on x86 processors.  It supports Python, Julia, R, and SPARQL kernels.
+
+The `lucyfer-m` image is a specialization of `jupyter/scipy-notebook` and runs
+on ARM64 processors.  It only supports Python and SPARQL kernels.
+
+
 ---
 ## Benefits
 
