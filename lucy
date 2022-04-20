@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# (c) Copyright 2022 pr3d4t0r
+# (c) Copyright 2022 by pr3d4t0r
 
 # vim: set fileencoding=utf-8:
 
@@ -18,6 +18,23 @@ die() {
     echo "$1"
     exit "$2"
 } # die
+
+
+assertActionInCLI() {
+    [[ -z "$1" ]] && die "Command missing; syntax: lucy start | stop | status" 8
+
+    case "$1" in
+        "start")
+            ;;
+        "stop")
+            ;;
+        "status")
+            ;;
+        *)
+            die "Syntax: lucy start | stop | status" 9
+            ;;
+    esac
+} # assertActionInCLI
 
 
 assertDockerServiceIsRunning() {
@@ -55,7 +72,7 @@ cat <<EOF
 
 The LUCYFER_WORKSPACE environment variable must point at the fully qualified
 path to the working directory where the user intends to store Jupyter notebooks
-and data.  This script links the Jupyter jovyan user $HOME to $LUCYFER_WORKSPACE
+and data.  This script links the Jupyter jovyan user $USER to LUCYFER_WORKSPACE
 for storing state, data, and notebooks.
 
 From the command line, do:
@@ -79,7 +96,7 @@ cat << EOF
 
 The BLAZEGRAPH_DATA environment variable must point at the fully qualified
 path to the working directory where the user intends to store graph data files.
-This script links /data in the Blazegraph container to $BLAZEGRAPH_DATA for
+This script links /data in the Blazegraph container to BLAZEGRAPH_DATA for
 storing database configuration and data.
 
 From the command line, do:
@@ -143,6 +160,12 @@ resolveImageByPlatform() {
 } # resolveImageByPlatform
 
 
+showJupyterDatascienceLab() {
+    echo ""
+    docker-compose -f "$LUCYFER_COMPOSE" ps -a
+} # showJupyterDatascienceLab
+
+
 runJupyterDatascienceLab() {
     _snuffContainer "lucyfer"
     _snuffContainer "kallisto"
@@ -150,14 +173,32 @@ runJupyterDatascienceLab() {
     echo ""
     env | awk '/LUCYFER/ || /JUPYTER/ || /HOME/ || /BLAZE/' | sort
     docker-compose -f "$LUCYFER_COMPOSE" up --remove-orphans --no-recreate -d || docker-compose rm -f 
-    sleep 10 # TODO: replace with an actual check to see if the container started/is healthy
-    docker ps -a | awk 'NR == 1 { print; next; } /lucyfer/ || /kallisto/'
+    # TODO: replace with an actual check to see if the container started/is healthy
+    sleep 10
+    # TODO:  delete this?
+    # docker ps -a | awk 'NR == 1 { print; next; } /lucyfer/ || /kallisto/'
+    showJupyterDatascienceLab
     docker logs lucyfer 2>&1 | awk -F "?" '/http:/ { gsub("token=", "Lucyfer access token = ", $NF); printf("\n%s\n", $NF); exit(0); }'
 } # runJupyterDatascienceLab
 
 
+killJupyterDatascienceLab() {
+    echo ""
+    env | awk '/LUCYFER/ || /JUPYTER/ || /HOME/ || /BLAZE/' | sort
+    docker-compose -f "$LUCYFER_COMPOSE" stop
+    showJupyterDatascienceLab
+} # killJupyterDatascienceLab
+
+
+displayEnvironment() {
+    echo "export BLAZEGRAPH_DATA=$(pwd)/data"
+} # displayEnvironment
+
+
 # *** main ***
 
+action="$1"
+assertActionInCLI "$action"
 assertDockerServiceIsRunning
 assertDockerIsAvailable
 assertDockerComposeFileExists
@@ -165,5 +206,17 @@ assertWorkspaceExists
 assertDataRepositoryExists
 setOwnership
 resolveImageByPlatform
-runJupyterDatascienceLab
+
+case "$action" in
+    "start")
+        runJupyterDatascienceLab
+        ;;
+    "status")
+        showJupyterDatascienceLab
+        ;;
+    "stop")
+        killJupyterDatascienceLab
+        ;;
+esac
+echo ""
 

@@ -78,9 +78,9 @@ Get the starter files from the Lucyfer project at GitHub and execute the runner:
 wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/lucyfer-compose.yaml && \
 wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/README-1ST.ipynb && \
 wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/README-SPARQL.ipynb && \
-wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/runlucyfer && \
-chmod +x ./runlucyfer && \
-./runlucyfer 
+wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/lucy && \
+chmod +x ./lucy && \
+./lucy start
 
 ```
 
