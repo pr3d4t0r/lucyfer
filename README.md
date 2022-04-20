@@ -109,7 +109,7 @@ by Arthur C. Clarke:
 _ALL THESE WORLDS ARE YOURS -- EXCEPT EUROPA.  ATTEMPT NO LANDING THERE._
 
 HAL-9000 transmitted that warning to Earth after fusing with the Monolith and
-David Bowman, the Star Child, before Jupiter attained critical mass and
+David Bowman, the Star Child, before Jupiter reached critical mass and
 exploded to become a star.
 
 People on Earth named the new star Lucifer, the Morning Star.
@@ -122,7 +122,7 @@ Linked photo &COPY; 1984 Metro-Goldwyin-Mayer<br><br>
 
 
 The `Dockerfille` and Compose files associated with this project enabled an 
-internal transformation of Jupyter to turn it into a better tool.
+internal transformation of Jupyter to turn it into an even better tool.
 
 
 ---
