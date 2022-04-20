@@ -118,7 +118,7 @@ Jupiter became a star thanks to the internal transformation that the cosmic
 general purpose tool, the Monolith, enabled.
 
 <img src='./resources/Lucyfer-Discovery.png'>
-Linked photo &COPY; 1984 Metro-Goldwyin-Mayer<br>
+Linked photo &COPY; 1984 Metro-Goldwyin-Mayer<br><br>
 
 
 The `Dockerfille` and Compose files associated with this project enabled an 
