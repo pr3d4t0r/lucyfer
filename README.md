@@ -103,7 +103,7 @@ if the database is running and on how to conclude the Lucyfer setup.
 ---
 ## Why Lucyfer?
 
-From _[2010:  Odyssey Two]_(https://en.wikipedia.org/wiki/2010:_Odyssey_Two)
+From _[2010:  Odyssey Two](https://en.wikipedia.org/wiki/2010:_Odyssey_Two)_
 by Arthur C. Clarke:
 
 _ALL THESE WORLDS ARE YOURS -- EXCEPT EUROPA.  ATTEMPT NO LANDING THERE._
@@ -118,7 +118,7 @@ Jupiter became a star thanks to the internal transformation that the cosmic
 general purpose tool, the Monolith, enabled.
 
 <img src='./resources/Lucyfer-Discovery.png'>
-Linked photo &COPY; 1984 Metro-Goldwyin-Mayer
+Linked photo &COPY; 1984 Metro-Goldwyin-Mayer<br>
 
 
 The `Dockerfille` and Compose files associated with this project enabled an 
