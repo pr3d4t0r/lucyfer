@@ -120,6 +120,7 @@ general purpose tool, the Monolith, enabled.
 <img src='./resources/Lucyfer-Discovery.png'>
 Linked photo &COPY; 1984 Metro-Goldwyin-Mayer
 
+
 The `Dockerfille` and Compose files associated with this project enabled an 
 internal transformation of Jupyter to turn it into a better tool.
 
