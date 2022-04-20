@@ -16,7 +16,7 @@ services:
             GRANT_SUDO             : 'yes'
             JUPYTER_LAB_ENABLE     : 'yes'
             PIP_TRUSTED_HOST       : '${PIP_TRUSTED_HOST}'
-        image: 'pr3d4t0r/lucyfer:latest'
+        image: 'pr3d4t0r/${LUCYFER_IMAGE}:latest'
         mem_reservation: 4G
         ports:
             # *****************************************************************

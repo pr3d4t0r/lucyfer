@@ -126,17 +126,34 @@ _snuffContainer() {
 } # _snuffContainer
 
 
-runJupyterScienceLab() {
+resolveImageByPlatform() {
+   local platform=$(uname -a | awk 'BEGIN { m = "ARM64"; i = "X86"; } { if ($14 ~ m) print(m); if ($14 ~ i) print(i); }')
+
+    case "$platform" in
+        "ARM64")
+            export LUCYFER_IMAGE="lucyfer-m"
+            ;;
+        "X86")
+            export LUCYFER_IMAGE="lucyfer"
+            ;;
+        *)
+            die "host platform not supported" 7
+            ;;
+    esac
+} # resolveImageByPlatform
+
+
+runJupyterDatascienceLab() {
     _snuffContainer "lucyfer"
     _snuffContainer "kallisto"
 
     echo ""
-    env | awk '/JUPYTER/ || /HOME/ || /BLAZE/' | sort
+    env | awk '/LUCYFER/ || /JUPYTER/ || /HOME/ || /BLAZE/' | sort
     docker-compose -f "$LUCYFER_COMPOSE" up --remove-orphans --no-recreate -d || docker-compose rm -f 
     sleep 10 # TODO: replace with an actual check to see if the container started/is healthy
     docker ps -a | awk 'NR == 1 { print; next; } /lucyfer/ || /kallisto/'
     docker logs lucyfer 2>&1 | awk -F "?" '/http:/ { gsub("token=", "Lucyfer access token = ", $NF); printf("\n%s\n", $NF); exit(0); }'
-} # runJupyterScienceLab
+} # runJupyterDatascienceLab
 
 
 # *** main ***
@@ -147,5 +164,6 @@ assertDockerComposeFileExists
 assertWorkspaceExists
 assertDataRepositoryExists
 setOwnership
-runJupyterScienceLab
+resolveImageByPlatform
+runJupyterDatascienceLab
 

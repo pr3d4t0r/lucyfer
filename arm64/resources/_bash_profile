@@ -1,0 +1,49 @@
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
+
+# User specific environment and startup programs
+
+PATH=.:./bin:$PATH:$HOME/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin
+PS1="[\[\033[01;37m\]\$? \$(if [[ \$? == 0 ]]; then echo \"\[\033[01;32m\]:)\"; else echo \"\[\033[01;31m\]:(\"; fi) $(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;36m\]\u@\h'; fi)\[\033[01;33m\] \W \$\[\033[00m\]] "
+
+export PATH
+export PS1
+export CLASSPATH=.:$CLASSPATH
+
+
+# Java environment - meh
+
+case $(uname -s) in
+  "Darwin")
+    export JAVA_HOME=$(/usr/libexec/java_home)
+    ;;
+esac
+
+
+alias env='env | sort'
+alias grep='grep --color'
+alias ls='ls --color'
+alias pudb=pudb3
+alias sha2='sha256sum'
+
+export EDITOR=vim
+export GIT_EDITOR="$EDITOR"
+export HISTSIZE=2000
+export SVN_EDITOR="$EDITOR"
+
+export TERM=screen-256color
+
+
+#
+# *** Docker ***
+#
+
+set -o vi
+
+
+umask 002
+
