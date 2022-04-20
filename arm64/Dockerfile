@@ -20,11 +20,19 @@ RUN             apt-get update && \
                     tree \
                     vim
 
+
+# Kotlin / Ganymede installation
+RUN             apt-get -y install default-jdk
+
 COPY            resources/_bash_profile /etc/skel/.bash_profile
 COPY            resources/_bash_profile /root/.bash_profile
 COPY            resources/_gitignore /etc/skel/.gitignore
 COPY            resources/_vimrc /etc/skel/.vimrc
 
+RUN             mkdir -p /var/ganymede && chown jovyan:users /var/ganymede
+WORKDIR         /var/ganymede 
+RUN             wget "https://github.com/allen-ball/ganymede/releases/download/v1.1.0.20210614/ganymede-kernel-1.1.0.20210614.jar" 
+WORKDIR         /home/jovyan
 
 USER            jovyan
 
@@ -33,6 +41,11 @@ COPY            --chown=${NB_UID}:${NB_GID} resources/requirements.txt /tmp/
 RUN             pip install -U --requirement /tmp/requirements.txt && \
                     fix-permissions "${CONDA_DIR}" && \
                     fix-permissions "/home/${NB_USER}"
+
+
+# Ganymede kernel installation:
+
+RUN             java -jar /var/ganymede/ganymede-kernel-1.1.0.20210614.jar --install
 
 
 # SPARQL kernel support
