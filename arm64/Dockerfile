@@ -3,6 +3,9 @@
 # vim: set fileencoding=utf-8:
 
 
+# TODO:  See https://github.com/pr3d4t0r/lucyfer/issues/26
+#        Use buildx once we have a common base image for all
+#        architectures.
 FROM            --platform=linux/arm64 jupyter/scipy-notebook:latest
 MAINTAINER      lucyfer AT cime.net
 
@@ -19,6 +22,11 @@ RUN             apt-get update && \
                     ssh \
                     tree \
                     vim
+
+
+# Kotlin installation
+RUN             apt-get -y install default-jdk
+
 
 COPY            resources/_bash_profile /etc/skel/.bash_profile
 COPY            resources/_bash_profile /root/.bash_profile
@@ -40,6 +48,10 @@ RUN             pip install -U --requirement /tmp/requirements.txt && \
 RUN             pip install sparqlkernel
 USER            root
 RUN             jupyter sparqlkernel install
+
+
+# Kotlin kernel support
+RUN             pip install kotlin-jupyter-kernel
 
 
 USER            jovyan
