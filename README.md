@@ -7,19 +7,21 @@ from the local system's development tools.  This empowers the user to use all
 Jupyter features without having to install any of the Jupyter packages locally.
 
 **tl;dr:  Lucyfer is a zero-conf, zero-install Python IDE for buiding high
-performance computing prototypes.**
+performance computing prototypes.  It enables data scientists and software
+engineers to work off the same code base and use the same tools.**
 
 
 ---
 ## Features
 
 - Git support
+- SPARQL kernel for interactive dataset exploration
 - `jq`
+- `pudb`, linters, devpi, `pytest`, `plotly`, and data handling Python tools
 - `rclone` for synchronizing data lakes between host and remote systems
 - `ssh`
 - `tree` (file system visualization)
 - Vim with NERDTree and other dev tools
-- `pudb`, linters, devpi, `pytest`, `plotly`, and data handling Python tools
 
 Lucyfer also fixes the Conda and `jovyan` (`$NB_USER`) permissions in the 
 Jupyter image and enables `pip` package installation.
@@ -65,8 +67,9 @@ Get the starter files from the Lucyfer project at GitHub and execute the runner:
 
 ```zsh
 wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/lucyfer-compose.yaml && \
+wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/README-1ST.ipynb && \
+wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/README-SPARQL.ipynb && \
 wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/runlucyfer && \
-wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/README-TOO.ipynb && \
 chmod +x ./runlucyfer && \
 ./runlucyfer 
 
@@ -93,17 +96,20 @@ by your password so that you can return the Lucyfer lab any time.
 
 ### Next steps... and get to work!
 
-Open the `README-TOO.ipynb` notebook.  It has live instructions on how to check
+Open the `README-1ST.ipynb` notebook.  It has live instructions on how to check
 if the database is running and on how to conclude the Lucyfer setup.
 
 
 ---
 ## Why Lucyfer?
 
+From _[2010:  Odyssey Two](https://en.wikipedia.org/wiki/2010:_Odyssey_Two)_
+by Arthur C. Clarke:
+
 _ALL THESE WORLDS ARE YOURS -- EXCEPT EUROPA.  ATTEMPT NO LANDING THERE._
 
 HAL-9000 transmitted that warning to Earth after fusing with the Monolith and
-David Bowman, the Star Child, before Jupiter attained critical mass and
+David Bowman, the Star Child, before Jupiter reached critical mass and
 exploded to become a star.
 
 People on Earth named the new star Lucifer, the Morning Star.
@@ -111,18 +117,16 @@ People on Earth named the new star Lucifer, the Morning Star.
 Jupiter became a star thanks to the internal transformation that the cosmic 
 general purpose tool, the Monolith, enabled.
 
-<img src='https://spinorlab.files.wordpress.com/2016/11/2010.jpg'>
+<img src='./resources/Lucyfer-Discovery.png'>
+Linked photo &COPY; 1984 Metro-Goldwyin-Mayer<br><br>
+
 
 The `Dockerfille` and Compose files associated with this project enabled an 
-internal transformation of Jupyter to turn it into a better tool.
+internal transformation of Jupyter to turn it into an even better tool.
 
 
 ---
-## 3rd-party licensing information
+## Licensing information
 
-Lucyfer integrates with the <a href='https://github.com/aws/graph-notebook'
-target='_blank'>AWS graph-notebook</a>, licensed under <a href='https://github.com/aws/graph-notebook/blob/main/LICENSE' target='_blank'>
-Apache 2</a>.  The Lucyfer Dockerfile pulls the corresponding graph-notebook
-Python packages and Jupyter extensions into the Lucyfer image, but does not 
-modify any of the code.
-
+Lucyfer is released under the [BSD-3 license](./LICENSE.txt), and it's based
+on the  Jupyter Project, also released under the [BSD-3 license](https://github.com/jupyter/docker-stacks/blob/master/LICENSE.md).
