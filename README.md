@@ -16,6 +16,7 @@ engineers to work off the same code base and use the same tools.**
 
 - Git support
 - SPARQL kernel for interactive dataset exploration
+- Kotlin kernel for state-of-the-art interactive JVM REPL and exploration
 - `jq`
 - `pudb`, linters, devpi, `pytest`, `plotly`, and data handling Python tools
 - `rclone` for synchronizing data lakes between host and remote systems
