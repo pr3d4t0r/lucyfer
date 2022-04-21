@@ -3,6 +3,9 @@
 # vim: set fileencoding=utf-8:
 
 
+# TODO:  See https://github.com/pr3d4t0r/lucyfer/issues/26
+#        Use buildx once we have a common base image for all
+#        architectures.
 FROM            --platform=linux/arm64 jupyter/scipy-notebook:latest
 MAINTAINER      lucyfer AT cime.net
 
@@ -21,18 +24,15 @@ RUN             apt-get update && \
                     vim
 
 
-# Kotlin / Ganymede installation
+# Kotlin installation
 RUN             apt-get -y install default-jdk
+
 
 COPY            resources/_bash_profile /etc/skel/.bash_profile
 COPY            resources/_bash_profile /root/.bash_profile
 COPY            resources/_gitignore /etc/skel/.gitignore
 COPY            resources/_vimrc /etc/skel/.vimrc
 
-RUN             mkdir -p /var/ganymede && chown jovyan:users /var/ganymede
-WORKDIR         /var/ganymede 
-RUN             wget "https://github.com/allen-ball/ganymede/releases/download/v1.1.0.20210614/ganymede-kernel-1.1.0.20210614.jar" 
-WORKDIR         /home/jovyan
 
 USER            jovyan
 
@@ -43,16 +43,15 @@ RUN             pip install -U --requirement /tmp/requirements.txt && \
                     fix-permissions "/home/${NB_USER}"
 
 
-# Ganymede kernel installation:
-
-RUN             java -jar /var/ganymede/ganymede-kernel-1.1.0.20210614.jar --install
-
-
 # SPARQL kernel support
 
 RUN             pip install sparqlkernel
 USER            root
 RUN             jupyter sparqlkernel install
+
+
+# Kotlin kernel support
+RUN             pip install kotlin-jupyter-kernel
 
 
 USER            jovyan

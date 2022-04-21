@@ -155,8 +155,9 @@ dmypy.json
 **rclone-crypt*
 **rclone.conf
 **test.txt
-*swp
+*\.m2/*
 *graph-notebook-*
+*swp
 
 
 # pycharm
