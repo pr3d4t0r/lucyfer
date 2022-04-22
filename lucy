@@ -26,6 +26,8 @@ assertActionInCLI() {
     case "$1" in
         "start")
             ;;
+        "start86")
+            ;;
         "stop")
             ;;
         "status")
@@ -209,6 +211,10 @@ resolveImageByPlatform
 
 case "$action" in
     "start")
+        runJupyterDatascienceLab
+        ;;
+    "start86")
+        export LUCYFER_IMAGE="lucyfer"
         runJupyterDatascienceLab
         ;;
     "status")

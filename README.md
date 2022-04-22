@@ -16,6 +16,7 @@ engineers to work off the same code base and use the same tools.**
 
 - Git support
 - SPARQL kernel for interactive dataset exploration
+- Kotlin kernel for state-of-the-art interactive JVM REPL and exploration
 - `jq`
 - `pudb`, linters, devpi, `pytest`, `plotly`, and data handling Python tools
 - `rclone` for synchronizing data lakes between host and remote systems
@@ -30,10 +31,11 @@ Jupyter image and enables `pip` package installation.
 ### Important
 
 The `lucyfer` image is a specialization of `jupyter/datascience-notebook` and
-runs on x86 processors.  It supports Python, Julia, R, and SPARQL kernels.
+runs on x86 processors.  It supports Python, Julia, Kotlin, R, and SPARQL
+kernels.
 
 The `lucyfer-m` image is a specialization of `jupyter/scipy-notebook` and runs
-on ARM64 processors.  It only supports Python and SPARQL kernels.
+on ARM64 processors.  It only supports Python, Kotlin, and SPARQL kernels.
 
 
 ---
