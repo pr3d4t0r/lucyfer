@@ -21,9 +21,11 @@ die() {
 
 
 assertActionInCLI() {
-    [[ -z "$1" ]] && die "Command missing; syntax: lucy start | stop | status" 8
+    [[ -z "$1" ]] && die "Command missing; syntax: lucy env | start | stop | status | update" 8
 
     case "$1" in
+        "env")
+            ;;
         "start")
             ;;
         "start86")
@@ -32,8 +34,10 @@ assertActionInCLI() {
             ;;
         "status")
             ;;
+        "update")
+            ;;
         *)
-            die "Syntax: lucy start | stop | status" 9
+            die "Syntax: lucy env | start | stop | status | update" 9
             ;;
     esac
 } # assertActionInCLI
@@ -193,8 +197,14 @@ killJupyterDatascienceLab() {
 
 
 displayEnvironment() {
+    echo "export LUCYFER_WORKSPACE=$(pwd)"
     echo "export BLAZEGRAPH_DATA=$(pwd)/data"
 } # displayEnvironment
+
+
+update() {
+    die "update - not implemented yet" 99
+} # update
 
 
 # *** main ***
@@ -210,6 +220,9 @@ setOwnership
 resolveImageByPlatform
 
 case "$action" in
+    "env")
+        displayEnvironment
+        ;;
     "start")
         runJupyterDatascienceLab
         ;;
@@ -222,6 +235,9 @@ case "$action" in
         ;;
     "stop")
         killJupyterDatascienceLab
+        ;;
+    "update")
+        update
         ;;
 esac
 echo ""
