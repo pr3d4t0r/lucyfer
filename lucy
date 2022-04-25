@@ -10,6 +10,13 @@ set -e
 # +++ constants +++
 
 LUCYFER_COMPOSE='lucyfer-compose.yaml'
+LUCYFER_GITHUB_FILES=(
+    "lucyfer-compose.yaml"
+    "README-1ST.ipynb"
+    "README-SPARQL.ipynb"
+    "README-Kotlin.ipynb"
+    "lucy" )
+LUCYFER_GITHUB_PATH="https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master"
 
 
 # *** functions ***
@@ -203,7 +210,21 @@ displayEnvironment() {
 
 
 update() {
-    die "update - not implemented yet" 99
+    local fullURL
+    local localPath
+
+    for fileName in ${LUCYFER_GITHUB_FILES[@]}
+    do
+        fullURL="$LUCYFER_GITHUB_PATH/$fileName"
+        localPath="./$fileName"
+        echo ">> $fullURL"
+        echo [[ -e "$localPath" ]] && rm -f "$localPath"
+        wget "$fullURL"
+        echo ""∑
+    done
+
+    # Heuristic:
+    chmod +x "./lucy"
 } # update
 
 
