@@ -114,8 +114,8 @@ if the database is running and on how to conclude the Lucyfer setup.
 
 ### Updates
 
-Lucyfer is an ongoing effort, and the team builds new images once a week o week
-on average.  To update your Lucyfer IDE setup all you have to do is run:
+Lucyfer is an ongoing effort, and the team builds new images once a week on
+average.  To update your Lucyfer IDE setup all you have to do is run:
 
 ```zsh
 ./lucy update
