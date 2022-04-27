@@ -112,6 +112,24 @@ Open the `README-1ST.ipynb` notebook.  It has live instructions on how to check
 if the database is running and on how to conclude the Lucyfer setup.
 
 
+### Updates
+
+Lucyfer is an ongoing effort, and the team builds new images once a week o week
+on average.  To update your Lucyfer IDE setup all you have to do is run:
+
+```zsh
+./lucy update
+```
+
+Effects:
+
+- Updates the `README*.ipynb* files
+- Updates the `lucy` script
+- Pulls `pr3d4t0r/lucyfer:latest` from Docker Hub
+
+The file updates are fetched from the Lucyfer project `master` branch on GitHub.
+
+
 ---
 ## Why Lucyfer?
 
