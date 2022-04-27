@@ -17,6 +17,7 @@ LUCYFER_GITHUB_FILES=(
     "README-Kotlin.ipynb"
     "lucy" )
 LUCYFER_GITHUB_PATH="https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master"
+LUCYFER_HUB_IMAGE="pr3d4t0r/lucyfer:latest"
 
 
 # *** functions ***
@@ -187,9 +188,8 @@ runJupyterDatascienceLab() {
     env | awk '/LUCYFER/ || /JUPYTER/ || /HOME/ || /BLAZE/' | sort
     docker-compose -f "$LUCYFER_COMPOSE" up --remove-orphans --no-recreate -d || docker-compose rm -f 
     # TODO: replace with an actual check to see if the container started/is healthy
+
     sleep 10
-    # TODO:  delete this?
-    # docker ps -a | awk 'NR == 1 { print; next; } /lucyfer/ || /kallisto/'
     showJupyterDatascienceLab
     docker logs lucyfer 2>&1 | awk -F "?" '/http:/ { gsub("token=", "Lucyfer access token = ", $NF); printf("\n%s\n", $NF); exit(0); }'
 } # runJupyterDatascienceLab
@@ -225,6 +225,10 @@ update() {
 
     # Heuristic:
     chmod +x "./lucy"
+
+    docker pull "$LUCYFER_HUB_IMAGE"
+
+    echo "Lucyfer update complete"
 } # update
 
 
