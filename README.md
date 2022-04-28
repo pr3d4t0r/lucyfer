@@ -79,6 +79,7 @@ Get the starter files from the Lucyfer project at GitHub and execute the runner:
 ```zsh
 wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/lucyfer-compose.yaml && \
 wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/README-1ST.ipynb && \
+wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/README-Kotlin.ipynb && \
 wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/README-SPARQL.ipynb && \
 wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/lucy && \
 chmod +x ./lucy && \
@@ -109,6 +110,24 @@ by your password so that you can return the Lucyfer lab any time.
 
 Open the `README-1ST.ipynb` notebook.  It has live instructions on how to check
 if the database is running and on how to conclude the Lucyfer setup.
+
+
+### Updates
+
+Lucyfer is an ongoing effort, and the team builds new images once a week on
+average.  To update your Lucyfer IDE setup all you have to do is run:
+
+```zsh
+./lucy update
+```
+
+Effects:
+
+- Updates the `README*.ipynb* files
+- Updates the `lucy` script
+- Pulls `pr3d4t0r/lucyfer:latest` from Docker Hub
+
+The file updates are fetched from the Lucyfer project `master` branch on GitHub.
 
 
 ---

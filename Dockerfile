@@ -17,6 +17,7 @@ RUN             apt-get update && \
                 apt-get -y install \
                     git \
                     graphviz \
+                    htop \
                     jq \
                     rclone \
                     ssh \
