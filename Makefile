@@ -1,4 +1,4 @@
-# (c) Copyright 2022, pr3d4t0r
+# (c) Copyright 2022 Lucyfer Contributors
 
 # vim: set fileencoding=utf-8:
 
