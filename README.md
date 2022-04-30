@@ -147,7 +147,7 @@ People on Earth named the new star Lucifer, the Morning Star.
 Jupiter became a star thanks to the internal transformation that the cosmic 
 general purpose tool, the Monolith, enabled.
 
-<img src='./resources/Lucyfer-Discovery.png'>
+<img src='https://github.com/pr3d4t0r/lucyfer/blob/0026-scipy-no-datasci-notebook-ancestor/resources/Lucyfer-Discovery.png?raw=true'><br>
 Linked photo &COPY; 1984 Metro-Goldwyin-Mayer<br><br>
 
 
@@ -158,5 +158,18 @@ internal transformation of Jupyter to turn it into an even better tool.
 ---
 ## Licensing information
 
-Lucyfer is released under the [BSD-3 license](./LICENSE.txt), and it's based
-on the  Jupyter Project, also released under the [BSD-3 license](https://github.com/jupyter/docker-stacks/blob/master/LICENSE.md).
+Lucyfer is released under the [BSD-3 license](./LICENSE.txt), and is based on
+the Jupyter Project, also released under the [BSD-3 license](https://github.com/jupyter/docker-stacks/blob/master/LICENSE.md).
+
+Copyright &#169; the Lucyfer Project Contributors
+
+
+### Contributors
+
+|Name|GitHub user name|
+|----|----------------|
+|Balmos, Scott|[sbalmos](https://github.com/sbalmos)|
+|Ciurana, Eugene|[pr3d4t0r](https://github.com/pr3d4t0r)|
+|Heudecker, Nick|[nheudecker](https://github.com/nheudecker)|
+|Ross, Phillip|[phillipross](https://github.com/phillipross)|
+
