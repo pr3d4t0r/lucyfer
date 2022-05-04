@@ -11,7 +11,6 @@ set -e
 
 LUCYFER_COMPOSE='lucyfer-compose.yaml'
 LUCYFER_GITHUB_FILES=(
-    "lucyfer-compose.yaml"
     "README-1ST.ipynb"
     "README-SPARQL.ipynb"
     "README-Kotlin.ipynb"
@@ -209,7 +208,24 @@ displayEnvironment() {
 } # displayEnvironment
 
 
+_fetchFileFrom() {
+    local fullURL="$1"
+    local targetLocation="$2"
+    
+    if [[ -n "$(which wget)" ]]
+    then
+        wget -O "$targetLocation" "$fullURL"
+    elif [[ -n "$(which curl)" ]]
+    then
+        curl -o "$targetLocation" "$fullURL"
+    else
+        die "Neither wget nor cURL are available; install either and retry" 10
+    fi
+} # _fetchFileFrom
+
+
 update() {
+    local fileName
     local fullURL
     local localPath
 
@@ -219,8 +235,8 @@ update() {
         localPath="./$fileName"
         echo ">> $fullURL"
         echo [[ -e "$localPath" ]] && rm -f "$localPath"
-        wget "$fullURL"
-        echo ""∑
+        _fetchFileFrom "$fullURL" "$localPath"
+        echo ""
     done
 
     # Heuristic:

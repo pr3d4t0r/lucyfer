@@ -74,6 +74,9 @@ cd ~/development/mywork
 
 ### Deployment
 
+
+#### wget - most Linux distributions
+
 Get the starter files from the Lucyfer project at GitHub and execute the runner:
 
 ```zsh
@@ -86,6 +89,23 @@ chmod +x ./lucy && \
 ./lucy start
 
 ```
+
+
+#### cURL - macOS, other UNIX versions
+
+```zsh
+curl -o lucyfer-compose.yaml https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/lucyfer-compose.yaml && \
+curl -o README-1ST.ipynb https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/README-1ST.ipynb && \
+curl -o README-Kotlin.ipynb https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/README-Kotlin.ipynb && \
+curl -o README-SPARQL.ipynb https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/README-SPARQL.ipynb && \
+curl -o lucy https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/lucy && \
+chmod +x ./lucy && \
+./lucy start
+
+```
+
+
+#### Validate installation
 
 Docker displays Lucyfer and Kallisto among all the running containers:
 
