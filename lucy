@@ -16,7 +16,7 @@ LUCYFER_GITHUB_FILES=(
     "README-Kotlin.ipynb"
     "lucy" )
 LUCYFER_GITHUB_PATH="https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master"
-LUCYFER_HUB_IMAGE="pr3d4t0r/lucyfer:latest"
+LUCYFER_HUB_VERSION="2.0.8"
 
 
 # *** functions ***
@@ -161,10 +161,10 @@ resolveImageByPlatform() {
 
     case "$platform" in
         "ARM64")
-            export LUCYFER_IMAGE="lucyfer-m"
+            export LUCYFER_IMAGE="pr3d4t0r/lucyfer-m:$LUCYFER_HUB_VERSION"
             ;;
         "X86")
-            export LUCYFER_IMAGE="lucyfer"
+            export LUCYFER_IMAGE="pr3d4t0r/lucyfer:$LUCYFER_HUB_VERSION"
             ;;
         *)
             die "host platform not supported" 7
@@ -242,7 +242,7 @@ update() {
     # Heuristic:
     chmod +x "./lucy"
 
-    docker pull "$LUCYFER_HUB_IMAGE"
+    docker pull "$LUCYFER_IMAGE"
 
     echo "Lucyfer update complete"
 } # update
@@ -268,7 +268,7 @@ case "$action" in
         runJupyterDatascienceLab
         ;;
     "start86")
-        export LUCYFER_IMAGE="lucyfer"
+        export LUCYFER_IMAGE="pr3d4t0r/lucyfer:$LUCYFER_HUB_VERSION"
         runJupyterDatascienceLab
         ;;
     "status")
