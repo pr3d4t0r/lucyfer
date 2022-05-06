@@ -16,7 +16,7 @@ LUCYFER_GITHUB_FILES=(
     "README-Kotlin.ipynb"
     "lucy" )
 LUCYFER_GITHUB_PATH="https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master"
-LUCYFER_HUB_VERSION="2.0.8"
+LUCYFER_HUB_VERSION="2.0.9"
 
 
 # *** functions ***
@@ -28,7 +28,8 @@ die() {
 
 
 assertActionInCLI() {
-    [[ -z "$1" ]] && die "Command missing; syntax: lucy env | start | stop | status | update" 8
+    local syntax="syntax: lucy env | start | stop | status | update | version"
+    [[ -z "$1" ]] && die "Command missing; $syntax" 8
 
     case "$1" in
         "env")
@@ -43,8 +44,10 @@ assertActionInCLI() {
             ;;
         "update")
             ;;
+        "version")
+            ;;
         *)
-            die "Syntax: lucy env | start | stop | status | update" 9
+            die "$syntax" 9
             ;;
     esac
 } # assertActionInCLI
@@ -248,6 +251,11 @@ update() {
 } # update
 
 
+version() {
+    printf "\nLucyfer version: $LUCYFER_HUB_VERSION\n"
+} # version
+
+
 # *** main ***
 
 action="$1"
@@ -279,6 +287,9 @@ case "$action" in
         ;;
     "update")
         update
+        ;;
+    "version")
+        version
         ;;
 esac
 echo ""

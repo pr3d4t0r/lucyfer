@@ -59,4 +59,6 @@ RUN             pip install kotlin-jupyter-kernel
 
 
 USER            jovyan
+ARG             LUCYFER_VERSION=0.0.0
+ENV             LUCYFER_VERSION=${LUCYFER_VERSION}
 
