@@ -132,6 +132,25 @@ Open the `README-1ST.ipynb` notebook.  It has live instructions on how to check
 if the database is running and on how to conclude the Lucyfer setup.
 
 
+### Running Lucyfer from a customized Docker Compose file
+
+There are use cases where the `lucyfer-compose.yaml` file doesn't fit the
+science or engineering team's setup, and they wish to run Lucyfer from a custom
+Docker Compose file, for example `mornyngstar-compose.yaml`.  The `lucy` script
+initializes the `LUCYFER_COMPOSE` internal environment variable with the default
+Compose file.  To override it, simply define the variable prior to launching the
+container to use a different file:
+
+```bash
+LUCYFER_COMPOSE="mornyngstar-compose.yaml" ./lucy start
+```
+
+Differences between `mornyngstar-` and `lucyfer-` files:
+
+1. Use of port 8807 instead of 8805
+1. Docker assigns the container name instead of using the default `lucyfer`
+
+
 ### Updates
 
 Lucyfer is an ongoing effort, and the team builds new images once a week on
@@ -167,12 +186,15 @@ People on Earth named the new star Lucifer, the Morning Star.
 Jupiter became a star thanks to the internal transformation that the cosmic 
 general purpose tool, the Monolith, enabled.
 
-<img src='https://github.com/pr3d4t0r/lucyfer/blob/0026-scipy-no-datasci-notebook-ancestor/resources/Lucyfer-Discovery.png?raw=true'><br>
+<img src='https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/resources/Lucyfer-Discovery.png'><br>
 Linked photo &COPY; 1984 Metro-Goldwyin-Mayer<br><br>
 
 
 The `Dockerfille` and Compose files associated with this project enabled an 
 internal transformation of Jupyter to turn it into an even better tool.
+
+Last, why is the alternate Compose file named `mornyngstar`?  Because that's 
+another name for Lucyfer.
 
 
 ---

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# (c) Copyright 2022 by pr3d4t0r
+# (c) Copyright 2022 by the Lucyfer Contributors
 
 # vim: set fileencoding=utf-8:
 
@@ -9,7 +9,6 @@ set -e
 
 # +++ constants +++
 
-LUCYFER_COMPOSE='lucyfer-compose.yaml'
 LUCYFER_GITHUB_FILES=(
     "README-1ST.ipynb"
     "README-SPARQL.ipynb"
@@ -76,6 +75,10 @@ assertDockerIsAvailable() {
 
 
 assertDockerComposeFileExists() {
+    if [[ -z "$LUCYFER_COMPOSE" ]]
+    then
+        export LUCYFER_COMPOSE='lucyfer-compose.yaml'
+    fi
     [[ -e "$LUCYFER_COMPOSE" ]] || die "$LUCYFER_COMPOSE is not present in pwd == $(pwd)" 2
 } # assertDockerComposeFileExists
 
