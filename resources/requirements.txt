@@ -2,6 +2,7 @@ devpi-client
 ipywidgets
 jupyter_contrib_nbextensions
 jupyter_nbextensions_configurator
+openpyxl
 pudb==2020.1
 pyflakes
 pytest 

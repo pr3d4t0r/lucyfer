@@ -8,3 +8,9 @@ DOCKER_VERSION=$(shell cat dockerimageversion.txt)
 
 include ./build.mk
 
+all:
+	pushd arm64 && make image && popd
+	pushd arm64 && make push && popd
+	make image
+	make push
+
