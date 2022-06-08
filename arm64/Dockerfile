@@ -40,6 +40,8 @@ COPY            resources/_bash_profile /root/.bash_profile
 COPY            resources/_gitignore /etc/skel/.gitignore
 COPY            resources/_vimrc /etc/skel/.vimrc
 
+RUN             ln -s /usr/bin/batcat /usr/local/bin/bat
+
 # ---------------------------------------- 
 
 USER            jovyan

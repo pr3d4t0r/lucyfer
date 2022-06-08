@@ -15,7 +15,7 @@ LUCYFER_GITHUB_FILES=(
     "README-Kotlin.ipynb"
     "lucy" )
 LUCYFER_GITHUB_PATH="https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master"
-LUCYFER_HUB_VERSION="2.1.3"
+LUCYFER_HUB_VERSION="2.1.4"
 
 
 # *** functions ***
@@ -27,7 +27,7 @@ die() {
 
 
 assertActionInCLI() {
-    local syntax="syntax: lucy env | start | stop | status | update | version"
+    local syntax="syntax: lucy env | start | stop | status | token | update | version"
     [[ -z "$1" ]] && die "Command missing; $syntax" 8
 
     case "$1" in
@@ -40,6 +40,8 @@ assertActionInCLI() {
         "stop")
             ;;
         "status")
+            ;;
+        "token")
             ;;
         "update")
             ;;
@@ -185,6 +187,29 @@ showJupyterDatascienceLab() {
 } # showJupyterDatascienceLab
 
 
+showToken() {
+    local token
+
+    if [[ ! -e ".jupyter/jupyter_server_config.json" ]]
+    then
+        token=$(docker logs lucyfer 2>&1 | awk -F "?" '/http:/ { gsub("token=", "", $NF); printf($NF); exit(0); }')
+
+        if [[ -n "$token" ]]
+        then
+            printf "\nLucyfer authentication token = $token\n"
+            case $(uname) in
+                "Darwin")
+                    echo "    The authentication token is available on the clipboard; Cmd-V to paste"
+                    echo "$token" | pbcopy
+                    ;;
+            esac
+        fi
+    else
+        printf "\nUse the password to log on to Lucyfer; no token available\n"
+    fi
+} # showToken
+
+
 runJupyterDatascienceLab() {
     _snuffContainer "lucyfer"
     _snuffContainer "kallisto"
@@ -196,7 +221,7 @@ runJupyterDatascienceLab() {
 
     sleep 10
     showJupyterDatascienceLab
-    docker logs lucyfer 2>&1 | awk -F "?" '/http:/ { gsub("token=", "Lucyfer access token = ", $NF); printf("\n%s\n", $NF); exit(0); }'
+    showToken
 } # runJupyterDatascienceLab
 
 
@@ -287,6 +312,9 @@ case "$action" in
         ;;
     "stop")
         killJupyterDatascienceLab
+        ;;
+    "token")
+        showToken
         ;;
     "update")
         update

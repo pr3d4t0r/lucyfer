@@ -114,7 +114,7 @@ CONTAINER ID   IMAGE                      COMMAND                  CREATED      
 0aad00c6ecdc   pr3d4t0r/lucyfer:latest    "tini -g -- start-no…"   2 seconds ago   Up 2 seconds   0.0.0.0:8805->8888/tcp   lucyfer
 5bbec632c314   lyrasis/blazegraph:2.1.5   "/docker-entrypoint.…"   2 seconds ago   Up 2 seconds   0.0.0.0:8889->8080/tcp   kallisto
 
-Lucyfer access token = 1d156b04af64bded5ed6ca274e90a696cfd6f4be06bfbfc7
+Lucyfer authentication token = 1d156b04af64bded5ed6ca274e90a696cfd6f4be06bfbfc7
 ```
 
 
@@ -122,8 +122,8 @@ Lucyfer access token = 1d156b04af64bded5ed6ca274e90a696cfd6f4be06bfbfc7
 
 Open this URL in your browser:  <a href='http://localhost:8805' target='_blank'>http://localhost:8805</a>
 
-Enter the Lucyfer access token in the field at the bottom of the page, followed
-by your password so that you can return the Lucyfer lab any time.
+Enter the Lucyfer authentication token in the field at the bottom of the page,
+followed by your password so that you can return the Lucyfer lab any time.
 
 
 ### Next steps... and get to work!
@@ -167,6 +167,23 @@ Effects:
 - Pulls `pr3d4t0r/lucyfer:latest` from Docker Hub
 
 The file updates are fetched from the Lucyfer project `master` branch on GitHub.
+
+
+### Viewing the authentication token
+
+The authentication token for accessing the Lucyfer environment can be displayed
+usint the `token` command:
+
+```zsh
+./lucy token
+```
+
+Effects:
+
+- Displays the current authentication token if a password is not set
+- On macOS, the authentication token is copied to the clipboard for easy
+  pasting with Cmd-V
+- Does nothing if the Lucyfer password is set
 
 
 ---
