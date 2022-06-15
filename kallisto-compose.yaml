@@ -1,0 +1,20 @@
+# (c) Copyright 2022 by the Lucyfer Contributors
+
+# vim: set fileencoding=utf-8:
+
+
+version: '3'
+
+services:
+    kallisto_service:
+        container_name: 'kallisto'
+        environment:
+            BLAZEGRAPH_UID: '${BLAZEGRAPH_UID}'
+            BLAZEGRAPH_GID: '${BLAZEGRAPH_GID}'
+        image: 'pr3d4t0r/kallisto-m:latest'
+        ports:
+            - 8889:9999
+        privileged: true
+        volumes:
+            - '${BLAZEGRAPH_DATA}:/var/blazegraph/data'
+

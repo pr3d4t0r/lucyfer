@@ -35,15 +35,17 @@ services:
         volumes:
             - '${LUCYFER_WORKSPACE}:/home/jovyan'
 
-#     kallisto_service:
-#         container_name: 'kallisto'
-#         environment:
-#             BLAZEGRAPH_UID: '${BLAZEGRAPH_UID}'
-#             BLAZEGRAPH_GID: '${BLAZEGRAPH_GID}'
-#         image: 'lyrasis/blazegraph:2.1.5'
-#         ports:
-#             - 8889:8080
-#         privileged: true
-#         volumes:
-#             - '${BLAZEGRAPH_DATA}:/data'
+    kallisto_service:
+        container_name: 'kallisto'
+        environment:
+            BLAZEGRAPH_UID: '${BLAZEGRAPH_UID}'
+            BLAZEGRAPH_GID: '${BLAZEGRAPH_GID}'
+        # TODO:  Parameterize the image:
+        image: 'pr3d4t0r/kallisto-m:latest'
+        ports:
+            # - '127.0.0.1:8809:9999'
+            - '0.0.0.0:8809:9999'
+        privileged: true
+        volumes:
+            - '${BLAZEGRAPH_DATA}:/var/blazegraph/data'
 
