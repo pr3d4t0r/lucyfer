@@ -5,7 +5,6 @@
 
 # TODO:  Implement buildx in a safe manner
 # docker buildx use lucyfer-builder
-# FROM            jupyter/scipy-notebook:latest
 FROM            --platform=linux/arm64 ubuntu:jammy
 MAINTAINER      lucyfer AT cime.net
 
