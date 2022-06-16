@@ -11,10 +11,10 @@ services:
         environment:
             BLAZEGRAPH_UID: '${BLAZEGRAPH_UID}'
             BLAZEGRAPH_GID: '${BLAZEGRAPH_GID}'
-        image: 'pr3d4t0r/kallisto-m:latest'
+        image: '${KALLISTO_IMAGE}'
         ports:
             - 8889:9999
         privileged: true
         volumes:
-            - '${BLAZEGRAPH_DATA}:/var/blazegraph/data'
+            - '${KALLISTO_DATA}:/var/blazegraph/data'
 

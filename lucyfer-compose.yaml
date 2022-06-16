@@ -41,11 +41,11 @@ services:
             BLAZEGRAPH_UID: '${BLAZEGRAPH_UID}'
             BLAZEGRAPH_GID: '${BLAZEGRAPH_GID}'
         # TODO:  Parameterize the image:
-        image: 'pr3d4t0r/kallisto-m:latest'
+        image: '${KALLISTO_IMAGE}'
         ports:
             # - '127.0.0.1:8809:9999'
             - '0.0.0.0:8809:9999'
         privileged: true
         volumes:
-            - '${BLAZEGRAPH_DATA}:/var/blazegraph/data'
+            - '${KALLISTO_DATA}:/var/blazegraph/data'
 
