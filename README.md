@@ -110,12 +110,34 @@ chmod +x ./lucy && \
 Docker displays Lucyfer and Kallisto among all the running containers:
 
 ```
-CONTAINER ID   IMAGE                      COMMAND                  CREATED         STATUS         PORTS                    NAMES
-0aad00c6ecdc   pr3d4t0r/lucyfer:latest    "tini -g -- start-no…"   2 seconds ago   Up 2 seconds   0.0.0.0:8805->8888/tcp   lucyfer
-5bbec632c314   lyrasis/blazegraph:2.1.5   "/docker-entrypoint.…"   2 seconds ago   Up 2 seconds   0.0.0.0:8889->8080/tcp   kallisto
+  Name                Command                       State                   Ports
+------------------------------------------------------------------------------------------
+kallisto   /bin/sh -c java -Xmx2g -Dc ...   Up                      0.0.0.0:8809->9999/tcp
+lucyfer    tini -g -- start-notebook.sh     Up (health: starting)   0.0.0.0:8805->8888/tcp
 
 Lucyfer authentication token = 1d156b04af64bded5ed6ca274e90a696cfd6f4be06bfbfc7
 ```
+
+
+#### Starting Lucyfer
+
+```zsh
+lucy start
+```
+Starts all Lucyfer services/container:  lucyfer IDE and kallisto graph DB.
+
+```zsh
+lucy start container
+```
+Starts only the specific container.  The container name must match the
+definitions in the `lucyfer-compose.yaml` file.  Service names correspond to the
+container name, with a `_service` suffix, like:
+
+- `lucyfer` is the container name for `lucyfer_service`
+- `kallisto` is the container name for `kallisto_service`
+
+The `stop` command may also take the container argument.  All other commants
+operate on the total service containers running when they are executed.
 
 
 ### Open the development lab
