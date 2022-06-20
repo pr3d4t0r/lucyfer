@@ -5,6 +5,18 @@
 
 version: '3'
 
+# IMPORTANT:
+# By convention, Lucyfer service names must always be a pastiche of the
+# container name, underscore, and the word service:
+#
+# Container   Service
+# ---------   -------
+# lucyfer     lucyfer_service
+# kallisto    kaliisto_service
+#
+# lucy resolves the service name based on the container/component that the user
+# wishes to run when the $container command line argument is used.
+
 services:
     lucyfer_service:
         container_name: 'lucyfer'
@@ -35,15 +47,17 @@ services:
         volumes:
             - '${LUCYFER_WORKSPACE}:/home/jovyan'
 
-#     kallisto_service:
-#         container_name: 'kallisto'
-#         environment:
-#             BLAZEGRAPH_UID: '${BLAZEGRAPH_UID}'
-#             BLAZEGRAPH_GID: '${BLAZEGRAPH_GID}'
-#         image: 'lyrasis/blazegraph:2.1.5'
-#         ports:
-#             - 8889:8080
-#         privileged: true
-#         volumes:
-#             - '${BLAZEGRAPH_DATA}:/data'
+    kallisto_service:
+        container_name: 'kallisto'
+        environment:
+            BLAZEGRAPH_UID: '${BLAZEGRAPH_UID}'
+            BLAZEGRAPH_GID: '${BLAZEGRAPH_GID}'
+        # TODO:  Parameterize the image:
+        image: '${KALLISTO_IMAGE}'
+        ports:
+            # - '127.0.0.1:8809:9999'
+            - '0.0.0.0:8809:9999'
+        privileged: true
+        volumes:
+            - '${KALLISTO_DATA}:/var/blazegraph/data'
 

@@ -15,7 +15,10 @@ LUCYFER_GITHUB_FILES=(
     "README-Kotlin.ipynb"
     "lucy" )
 LUCYFER_GITHUB_PATH="https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master"
-LUCYFER_HUB_VERSION="2.1.4"
+LUCYFER_HUB_VERSION="2.2.0"
+
+# Initialize Kallisto constants after Lucyfer because of dependencies.
+KALLISTO_HUB_VERSION="$LUCYFER_HUB_VERSION"
 
 
 # *** functions ***
@@ -85,25 +88,42 @@ assertDockerComposeFileExists() {
 } # assertDockerComposeFileExists
 
 
+assertComponentExists() {
+    # Make a dynamic list at some point?
+    case "$container" in
+        "")
+            ;;
+        "lucyfer")
+            ;;
+        "kallisto")
+            ;;
+        *)
+            awk -F "'" 'BEGIN { print("Available lucyfer containers:\n"); } /container_name/ { printf("* %s\n", $2); } END { print(""); }' "$LUCYFER_COMPOSE"
+            die "Container $container not found" 11
+    esac
+} # assertComponentExists
+
+
 assertWorkspaceExists() {
     if [[ -z "$LUCYFER_WORKSPACE" ]]
     then
-
-cat <<EOF
-
-The LUCYFER_WORKSPACE environment variable must point at the fully qualified
-path to the working directory where the user intends to store Jupyter notebooks
-and data.  This script links the Jupyter jovyan user $USER to LUCYFER_WORKSPACE
-for storing state, data, and notebooks.
-
-From the command line, do:
-
-export LUCYFER_WORKSPACE=/path/to/workspace/dir
-
-Where /path/to/workspace/dir is your workspace.
-
-EOF
-
+# --------------------------------------------------
+# TODO:  Deleete this block of code in a future revision
+# cat <<EOF
+# 
+# The LUCYFER_WORKSPACE environment variable must point at the fully qualified
+# path to the working directory where the user intends to store Jupyter notebooks
+# and data.  This script links the Jupyter jovyan user $USER to LUCYFER_WORKSPACE
+# for storing state, data, and notebooks.
+# 
+# From the command line, do:
+# 
+# export LUCYFER_WORKSPACE=/path/to/workspace/dir
+# 
+# Where /path/to/workspace/dir is your workspace.
+# 
+# EOF
+# --------------------------------------------------
         export LUCYFER_WORKSPACE="$(pwd)"
         echo "LUCYFER_WORKSPACE=$LUCYFER_WORKSPACE"
     fi
@@ -111,27 +131,30 @@ EOF
 
 
 assertDataRepositoryExists() {
-    if [[ -z "$BLAZEGRAPH_DATA" ]]
+    if [[ -z "$KALLISTO_DATA" ]]
     then
-cat << EOF
-
-The BLAZEGRAPH_DATA environment variable must point at the fully qualified
-path to the working directory where the user intends to store graph data files.
-This script links /data in the Blazegraph container to BLAZEGRAPH_DATA for
-storing database configuration and data.
-
-From the command line, do:
-
-export BLAZEGRAPH_DATA=/path/to/data/repository
-
-Where /path/to/data/repository is the database work area.
-
-EOF
-        export BLAZEGRAPH_DATA="$(pwd)/data"
-        echo "BLAZEGRAPH_DATA=$BLAZEGRAPH_DATA"
+# --------------------------------------------------
+# TODO:  Deleete this block of code in a future revision
+# cat << EOF
+# 
+# The KALLISTO_DATA environment variable must point at the fully qualified
+# path to the working directory where the user intends to store graph data files.
+# This script links /data in the Blazegraph container to KALLISTO_DATA for
+# storing database configuration and data.
+# 
+# From the command line, do:
+# 
+# export KALLISTO_DATA=/path/to/data/repository
+# 
+# Where /path/to/data/repository is the database work area.
+# 
+# EOF
+# --------------------------------------------------
+        export KALLISTO_DATA="$(pwd)/data"
+        echo "KALLISTO_DATA=$KALLISTO_DATA"
     fi
 
-    mkdir -p "$BLAZEGRAPH_DATA"
+    mkdir -p "$KALLISTO_DATA"
 } # assertDataRepositoryExists
 
 
@@ -169,9 +192,11 @@ resolveImageByPlatform() {
 
     case "$platform" in
         "ARM64")
+            export KALLISTO_IMAGE="pr3d4t0r/kallisto-m:$KALLISTO_HUB_VERSION"
             export LUCYFER_IMAGE="pr3d4t0r/lucyfer-m:$LUCYFER_HUB_VERSION"
             ;;
         "X86")
+            export KALLISTO_IMAGE="pr3d4t0r/kallisto$KALLISTO_HUB_VERSION"
             export LUCYFER_IMAGE="pr3d4t0r/lucyfer:$LUCYFER_HUB_VERSION"
             ;;
         *)
@@ -181,10 +206,10 @@ resolveImageByPlatform() {
 } # resolveImageByPlatform
 
 
-showJupyterDatascienceLab() {
+showLucyferLab() {
     echo ""
     docker-compose -f "$LUCYFER_COMPOSE" ps -a
-} # showJupyterDatascienceLab
+} # showLucyferLab
 
 
 showToken() {
@@ -210,32 +235,44 @@ showToken() {
 } # showToken
 
 
-runJupyterDatascienceLab() {
+runLucyferLab() {
     _snuffContainer "lucyfer"
     _snuffContainer "kallisto"
 
     echo ""
-    env | awk '/LUCYFER/ || /JUPYTER/ || /HOME/ || /BLAZE/' | sort
-    docker-compose -f "$LUCYFER_COMPOSE" up --remove-orphans --no-recreate -d || docker-compose rm -f 
+    env | awk '/LUCYFER/ || /JUPYTER/ || /HOME/ || /BLAZE/ || /KALLISTO/' | sort
+    if [[ -n "$container" ]]
+    then
+        local service="$container""_service"
+        docker-compose -f "$LUCYFER_COMPOSE" up --remove-orphans --no-recreate -d "$service" || docker-compose rm -f
+    else
+        docker-compose -f "$LUCYFER_COMPOSE" up --remove-orphans --no-recreate -d || docker-compose rm -f
+    fi
     # TODO: replace with an actual check to see if the container started/is healthy
 
     sleep 10
-    showJupyterDatascienceLab
+    showLucyferLab
     showToken
-} # runJupyterDatascienceLab
+} # runLucyferLab
 
 
-killJupyterDatascienceLab() {
+killLucyferLab() {
     echo ""
-    env | awk '/LUCYFER/ || /JUPYTER/ || /HOME/ || /BLAZE/' | sort
-    docker-compose -f "$LUCYFER_COMPOSE" stop
-    showJupyterDatascienceLab
-} # killJupyterDatascienceLab
+    env | awk '/LUCYFER/ || /JUPYTER/ || /HOME/ || /BLAZE/ || /KALLISTO/' | sort
+    if [[ -n "$container" ]]
+    then
+        local service="$container""_service"
+        docker-compose -f "$LUCYFER_COMPOSE" stop "$service"
+    else
+        docker-compose -f "$LUCYFER_COMPOSE" stop
+    fi
+    showLucyferLab
+} # killLucyferLab
 
 
 displayEnvironment() {
     echo "export LUCYFER_WORKSPACE=$(pwd)"
-    echo "export BLAZEGRAPH_DATA=$(pwd)/data"
+    echo "export KALLISTO_DATA=$(pwd)/data"
 } # displayEnvironment
 
 
@@ -274,6 +311,7 @@ update() {
     chmod +x "./lucy"
 
     docker pull "$LUCYFER_IMAGE"
+    docker pull "$KALLISTO_IMAGE"
 
     echo "Lucyfer update complete"
 } # update
@@ -287,10 +325,12 @@ version() {
 # *** main ***
 
 action="$1"
+container="$2"
 assertActionInCLI "$action"
 assertDockerServiceIsRunning
 assertDockerIsAvailable
 assertDockerComposeFileExists
+assertComponentExists
 assertWorkspaceExists
 assertDataRepositoryExists
 setOwnership
@@ -301,17 +341,18 @@ case "$action" in
         displayEnvironment
         ;;
     "start")
-        runJupyterDatascienceLab
+        runLucyferLab
         ;;
     "start86")
+        export KALLISTO_IMAGE="pr3d4t0r/lucyfer:$KALLISTO_HUB_VERSION"
         export LUCYFER_IMAGE="pr3d4t0r/lucyfer:$LUCYFER_HUB_VERSION"
-        runJupyterDatascienceLab
+        runLucyferLab
         ;;
     "status")
-        showJupyterDatascienceLab
+        showLucyferLab
         ;;
     "stop")
-        killJupyterDatascienceLab
+        killLucyferLab
         ;;
     "token")
         showToken
