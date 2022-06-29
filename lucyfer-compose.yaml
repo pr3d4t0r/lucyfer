@@ -41,7 +41,7 @@ services:
             # *****************************************************************
             # - 127.0.0.1:8805:8888
             # For LAN availability:
-            - 8805:8888
+            - '${LUCYFER_PORT}:8888'
         privileged: true
         user: 'root:${JUPYTER_LAB_GID}'
         volumes:
@@ -56,7 +56,7 @@ services:
         image: '${KALLISTO_IMAGE}'
         ports:
             # - '127.0.0.1:8809:9999'
-            - '0.0.0.0:8809:9999'
+            - '0.0.0.0:${KALLISTO_PORT}:9999'
         privileged: true
         volumes:
             - '${KALLISTO_DATA}:/var/blazegraph/data'

@@ -15,7 +15,7 @@ LUCYFER_GITHUB_FILES=(
     "README-Kotlin.ipynb"
     "lucy" )
 LUCYFER_GITHUB_PATH="https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master"
-LUCYFER_HUB_VERSION="2.2.0"
+LUCYFER_HUB_VERSION="2.2.1"
 
 # Initialize Kallisto constants after Lucyfer because of dependencies.
 KALLISTO_HUB_VERSION="$LUCYFER_HUB_VERSION"
@@ -173,6 +173,19 @@ setOwnership() {
     export JUPYTER_LAB_GID=$(id -g)
     export JUPYTER_LAB_UID=$(id -u)
 } # setOwnership
+
+
+setHostPorts() {
+    if [[ -z "$LUCYFER_PORT" ]]
+    then
+        export LUCYFER_PORT="8805"
+    fi
+
+    if [[ -z "$KALLISTO_PORT" ]]
+    then
+        export KALLISTO_PORT="8808"
+    fi
+} # setHostPorts
 
 
 _snuffContainer() {
@@ -334,6 +347,7 @@ assertComponentExists
 assertWorkspaceExists
 assertDataRepositoryExists
 setOwnership
+setHostPorts
 resolveImageByPlatform
 
 case "$action" in

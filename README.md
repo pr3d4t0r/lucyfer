@@ -173,6 +173,33 @@ Differences between `mornyngstar-` and `lucyfer-` files:
 1. Docker assigns the container name instead of using the default `lucyfer`
 
 
+### Setting the host ports for Lucyfer and Kallisto
+
+Lucyfer and Kallisto expose ports 8805 and 8809, respectively, to the host.
+Setting a different port is easy:  set the new port number using these
+environment variables:
+
+- LUCYFER_PORT
+- KALLISTO_PORT
+
+Example:
+
+```zsh
+KALLISTO_PORT=5555 ./lucy start
+```
+
+This results in:
+
+```
+  Name                Command                       State                   Ports         
+------------------------------------------------------------------------------------------
+kallisto   /bin/sh -c java -Xmx2g -Dc ...   Up                      0.0.0.0:5555->9999/tcp
+lucyfer    tini -g -- start-notebook.sh     Up (health: starting)   0.0.0.0:8805->8888/tcp
+
+Use the password to log on to Lucyfer; no token available
+```
+
+
 ### Updates
 
 Lucyfer is an ongoing effort, and the team builds new images once a week on
