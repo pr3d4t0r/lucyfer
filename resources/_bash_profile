@@ -28,6 +28,7 @@ alias env='env | sort'
 alias grep='grep --color'
 alias ls='ls --color'
 alias pudb=pudb3
+alias pytest='pytest -v'
 alias sha2='sha256sum'
 
 export EDITOR=vim
@@ -35,15 +36,7 @@ export GIT_EDITOR="$EDITOR"
 export HISTSIZE=2000
 export SVN_EDITOR="$EDITOR"
 
-export TERM=screen-256color
-
-
-#
-# *** Docker ***
-#
-
 set -o vi
-
 
 umask 002
 
