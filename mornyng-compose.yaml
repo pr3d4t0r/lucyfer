@@ -17,9 +17,9 @@ services:
         mem_reservation: 4G
         ports:
             # *****************************************************************
-            # Important:  the IP address binding depends on the host's 
+            # Important:  the IP address binding depends on the host's
             # configuration.  Binding to specific IP addresses on macOS doesn't
-            # work, but it works fine under Linux.  This needs to be resolved 
+            # work, but it works fine under Linux.  This needs to be resolved
             # throuth a target configuration manager later.  The lo interface
             # works across all operating systems but may open vulnerabililities
             # or affect the firewall configuration under Linux.

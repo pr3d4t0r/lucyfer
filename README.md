@@ -24,7 +24,7 @@ engineers to work off the same code base and use the same tools.**
 - `tree` (file system visualization)
 - Vim with NERDTree and other dev tools
 
-Lucyfer also fixes the Conda and `jovyan` (`$NB_USER`) permissions in the 
+Lucyfer also fixes the Conda and `jovyan` (`$NB_USER`) permissions in the
 Jupyter image and enables `pip` package installation.
 
 
@@ -67,7 +67,7 @@ Open a terminal and create a working directory anywhere in your file system, or
 pick any existing directory.
 
 ```zsh
-mkdir -p ~/development/mywork && 
+mkdir -p ~/development/mywork &&
 cd ~/development/mywork
 ```
 
@@ -191,7 +191,7 @@ KALLISTO_PORT=5555 ./lucy start
 This results in:
 
 ```
-  Name                Command                       State                   Ports         
+  Name                Command                       State                   Ports
 ------------------------------------------------------------------------------------------
 kallisto   /bin/sh -c java -Xmx2g -Dc ...   Up                      0.0.0.0:5555->9999/tcp
 lucyfer    tini -g -- start-notebook.sh     Up (health: starting)   0.0.0.0:8805->8888/tcp
@@ -249,17 +249,17 @@ exploded to become a star.
 
 People on Earth named the new star Lucifer, the Morning Star.
 
-Jupiter became a star thanks to the internal transformation that the cosmic 
+Jupiter became a star thanks to the internal transformation that the cosmic
 general purpose tool, the Monolith, enabled.
 
 <img src='https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/resources/Lucyfer-Discovery.png'><br>
 Linked photo &COPY; 1984 Metro-Goldwyin-Mayer<br><br>
 
 
-The `Dockerfille` and Compose files associated with this project enabled an 
+The `Dockerfille` and Compose files associated with this project enabled an
 internal transformation of Jupyter to turn it into an even better tool.
 
-Last, why is the alternate Compose file named `mornyngstar`?  Because that's 
+Last, why is the alternate Compose file named `mornyngstar`?  Because that's
 another name for Lucyfer.
 
 

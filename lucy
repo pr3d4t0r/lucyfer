@@ -188,6 +188,14 @@ setHostPorts() {
 } # setHostPorts
 
 
+setOpenOnStart() {
+    if [[ -z "$LUCYFER_OPEN_ON_START" ]]
+    then
+        LUCYFER_OPEN_ON_START="yes"
+    fi
+} # setOpenOnStart
+
+
 _snuffContainer() {
     [[ -n "$1" ]] || die "container name not specified in _snuffContainer()" 5
 
@@ -266,6 +274,7 @@ runLucyferLab() {
     sleep 10
     showLucyferLab
     showToken
+    [[ "yes" = "$LUCYFER_OPEN_ON_START" ]] && open "http://localhost:$LUCYFER_PORT"
 } # runLucyferLab
 
 
@@ -348,6 +357,7 @@ assertWorkspaceExists
 assertDataRepositoryExists
 setOwnership
 setHostPorts
+setOpenOnStart
 resolveImageByPlatform
 
 case "$action" in
