@@ -15,7 +15,7 @@ LUCYFER_GITHUB_FILES=(
     "README-Kotlin.ipynb"
     "lucy" )
 LUCYFER_GITHUB_PATH="https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master"
-LUCYFER_HUB_VERSION="2.2.4"
+LUCYFER_HUB_VERSION="3.0.0"
 
 # Initialize Kallisto constants after Lucyfer because of dependencies.
 KALLISTO_HUB_VERSION="$LUCYFER_HUB_VERSION"
@@ -110,18 +110,18 @@ assertWorkspaceExists() {
 # --------------------------------------------------
 # TODO:  Deleete this block of code in a future revision
 # cat <<EOF
-# 
+#
 # The LUCYFER_WORKSPACE environment variable must point at the fully qualified
 # path to the working directory where the user intends to store Jupyter notebooks
 # and data.  This script links the Jupyter jovyan user $USER to LUCYFER_WORKSPACE
 # for storing state, data, and notebooks.
-# 
+#
 # From the command line, do:
-# 
+#
 # export LUCYFER_WORKSPACE=/path/to/workspace/dir
-# 
+#
 # Where /path/to/workspace/dir is your workspace.
-# 
+#
 # EOF
 # --------------------------------------------------
         export LUCYFER_WORKSPACE="$(pwd)"
@@ -136,18 +136,18 @@ assertDataRepositoryExists() {
 # --------------------------------------------------
 # TODO:  Deleete this block of code in a future revision
 # cat << EOF
-# 
+#
 # The KALLISTO_DATA environment variable must point at the fully qualified
 # path to the working directory where the user intends to store graph data files.
 # This script links /data in the Blazegraph container to KALLISTO_DATA for
 # storing database configuration and data.
-# 
+#
 # From the command line, do:
-# 
+#
 # export KALLISTO_DATA=/path/to/data/repository
-# 
+#
 # Where /path/to/data/repository is the database work area.
-# 
+#
 # EOF
 # --------------------------------------------------
         export KALLISTO_DATA="$(pwd)/data"
@@ -160,7 +160,7 @@ assertDataRepositoryExists() {
 
 setOwnership() {
     # Set ownership to the correct user:group to avoid conflicts
-    # between the internal Docker container user names and the 
+    # between the internal Docker container user names and the
     # host's.
     #
     # This script resolves to the userID:groupID of the account
@@ -186,6 +186,14 @@ setHostPorts() {
         export KALLISTO_PORT="8808"
     fi
 } # setHostPorts
+
+
+setOpenOnStart() {
+    if [[ -z "$LUCYFER_OPEN_ON_START" ]]
+    then
+        LUCYFER_OPEN_ON_START="yes"
+    fi
+} # setOpenOnStart
 
 
 _snuffContainer() {
@@ -266,6 +274,7 @@ runLucyferLab() {
     sleep 10
     showLucyferLab
     showToken
+    [[ "yes" = "$LUCYFER_OPEN_ON_START" ]] && open "http://localhost:$LUCYFER_PORT"
 } # runLucyferLab
 
 
@@ -292,7 +301,7 @@ displayEnvironment() {
 _fetchFileFrom() {
     local fullURL="$1"
     local targetLocation="$2"
-    
+
     if [[ -n "$(which wget)" ]]
     then
         wget -O "$targetLocation" "$fullURL"
@@ -348,6 +357,7 @@ assertWorkspaceExists
 assertDataRepositoryExists
 setOwnership
 setHostPorts
+setOpenOnStart
 resolveImageByPlatform
 
 case "$action" in

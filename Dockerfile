@@ -44,7 +44,7 @@ COPY            resources/_vimrc /etc/skel/.vimrc
 
 RUN             ln -s /usr/bin/batcat /usr/local/bin/bat
 
-# ---------------------------------------- 
+# ----------------------------------------
 
 USER            jovyan
 
