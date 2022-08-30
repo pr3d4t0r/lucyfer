@@ -236,6 +236,27 @@ Effects:
 
 
 ---
+## Trips and tricks
+
+
+### Open on start
+
+Lucyfer can be configured to open a session in a browser window as soon as the
+service starts.  This convenience feature is enabled by defining:
+
+```bash
+LUCYFER_OPEN_ON_START="yes"
+.
+.
+./lucy start lucyfer
+```
+
+This environment variable is optional, and may only take the value of _yes_.
+The implementation opens `http://localhost:$LUCYFER_PORT` and works under macOS
+and Linux.
+
+
+---
 ## Why Lucyfer?
 
 From _[2010:  Odyssey Two](https://en.wikipedia.org/wiki/2010:_Odyssey_Two)_
