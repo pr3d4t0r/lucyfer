@@ -236,7 +236,7 @@ Effects:
 
 
 ---
-## Trips and tricks
+## Tips and tricks
 
 
 ### Open on start
@@ -300,5 +300,6 @@ Copyright &#169; the Lucyfer Project Contributors
 |Balmos, Scott|[sbalmos](https://github.com/sbalmos)|
 |Ciurana, Eugene|[pr3d4t0r](https://github.com/pr3d4t0r)|
 |Heudecker, Nick|[nheudecker](https://github.com/nheudecker)|
+|Lombardi, Andrew|[kinabalu](https://github.com/kinabalu)|
 |Ross, Phillip|[phillipross](https://github.com/phillipross)|
 
