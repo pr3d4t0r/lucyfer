@@ -54,9 +54,20 @@ RUN             pip install -U --requirement /tmp/requirements.txt && \
 
 # SPARQL kernel support
 
-RUN             pip install sparqlkernel
+# ----- Use Vivian Rook's patch for now -----
 USER            root
-RUN             jupyter sparqlkernel install
+RUN             curl -o /opt/sparql-kernel-T320934.zip "https://cime.net/upload_area/sparql-kernel-T320934.zip"
+RUN             cd /opt &&  \
+                    unzip sparql-kernel-T320934.zip &&  \
+                    rm -f sparql-kernel-T320934.zip &&  \
+                    cd sparql-kernel-T320934 && \
+                    pip install -e .
+RUN             jupyter sparqlkernel install 
+# ----- Pending update to the SPARQL kernel project ----
+# RUN             pip install sparqlkernel
+# USER            root
+# RUN             jupyter sparqlkernel install
+# # RUN             jupyter sparqlkernel install --user
 
 # Kotlin kernel support
 RUN             pip install kotlin-jupyter-kernel

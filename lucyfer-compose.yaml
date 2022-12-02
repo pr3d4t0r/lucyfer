@@ -42,6 +42,7 @@ services:
             # - 127.0.0.1:8805:8888
             # For LAN availability:
             - '${LUCYFER_PORT}:8888'
+            - '8889:8889'
         privileged: true
         user: 'root:${JUPYTER_LAB_GID}'
         volumes:
