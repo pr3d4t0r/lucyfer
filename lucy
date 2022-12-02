@@ -15,7 +15,7 @@ LUCYFER_GITHUB_FILES=(
     "README-Kotlin.ipynb"
     "lucy" )
 LUCYFER_GITHUB_PATH="https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master"
-LUCYFER_HUB_VERSION="3.0.1"
+LUCYFER_HUB_VERSION="3.1.0"
 
 # Initialize Kallisto constants after Lucyfer because of dependencies.
 KALLISTO_HUB_VERSION="$LUCYFER_HUB_VERSION"
@@ -30,11 +30,13 @@ die() {
 
 
 assertActionInCLI() {
-    local syntax="syntax: lucy env | start | stop | status | token | update | version"
+    local syntax="syntax: lucy env | neuter | start | stop | status | token | update | version"
     [[ -z "$1" ]] && die "Command missing; $syntax" 8
 
     case "$1" in
         "env")
+            ;;
+        "neuter")
             ;;
         "start")
             ;;
@@ -344,6 +346,26 @@ version() {
 } # version
 
 
+neuterInstallation() {
+    local answer
+    read -p "Are you sure you want to neuter the Lucyfer installation? yes/NO " answer
+
+    if [[ "$answer" == "yes" ]]
+    then
+        ./lucy stop
+        docker rm -f lucyfer kallisto
+        rm -vf ./.bash* ./.vimrc ./.viminfo ./kallisto-compose.yaml ./lucyfer-compose.yaml ./mornyng-compose.yaml ./.lesshst ./lucy ./.profile
+        rm -Rvf "./.local" "./.ipython" "./.vim" "./.ssh" "./.idea" "./.m2" "./.npm" "./.config" "./.cache" "./.jupyter" "./.ipynb_checkpoints"
+        rm -Rfv ./README-1ST.ipynb    ./README-Kotlin.ipynb ./README-SPARQL.ipynb
+        docker ps -a
+        echo "Lucyfer was neutered"
+    else
+        echo "Lucyfer neutering aborted - good choice"
+    fi
+    exit 0
+} # neuterInstallation
+
+
 # *** main ***
 
 action="$1"
@@ -363,6 +385,9 @@ resolveImageByPlatform
 case "$action" in
     "env")
         displayEnvironment
+        ;;
+    "neuter")
+        neuterInstallation
         ;;
     "start")
         runLucyferLab

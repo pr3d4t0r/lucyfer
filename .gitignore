@@ -136,6 +136,7 @@ dmypy.json
 **/*psd
 **/.conda/*
 **/.cufflinks*
+**/.lesshst
 **/.npm/*
 **/.theano
 **/.vim/*
