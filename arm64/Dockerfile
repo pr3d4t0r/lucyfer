@@ -1,7 +1,5 @@
 # (c) Copyright 2022 Lucyfer Contributors
 
-# vim: set fileencoding=utf-8:
-
 
 # TODO:  Implement buildx in a safe manner
 FROM            --platform=linux/arm64 jupyter/scipy-notebook:aarch64-latest
@@ -54,20 +52,11 @@ RUN             pip install -U --requirement /tmp/requirements.txt && \
 
 # SPARQL kernel support
 
-# ----- Use Vivian Rook's patch for now -----
-USER            root
-RUN             curl -o /opt/sparql-kernel-T320934.zip "https://cime.net/upload_area/sparql-kernel-T320934.zip"
-RUN             cd /opt &&  \
-                    unzip sparql-kernel-T320934.zip &&  \
-                    rm -f sparql-kernel-T320934.zip &&  \
-                    cd sparql-kernel-T320934 && \
-                    pip install -e .
-RUN             jupyter sparqlkernel install 
-# ----- Pending update to the SPARQL kernel project ----
-# RUN             pip install sparqlkernel
-# USER            root
-# RUN             jupyter sparqlkernel install
-# # RUN             jupyter sparqlkernel install --user
+# ----- Use Vivian Rook's patch because sparqlkernel seems abandoned -----
+RUN             pip install --no-cache-dir git+https://github.com/vivian-rook/sparql-kernel@5df26c96bbf96bd1a60006fa63e563dec7db3285
+RUN             python3 -m jupyter sparqlkernel install --sys-prefix
+# ----- Thank you, rook! -----
+
 
 # Kotlin kernel support
 RUN             pip install kotlin-jupyter-kernel
