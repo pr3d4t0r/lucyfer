@@ -3,7 +3,7 @@
 
 # TODO:  Implement buildx in a safe manner
 # docker buildx use lucyfer-builder
-FROM            --platform=linux/amd64 jupyter/scipy-notebook:latest
+FROM            --platform=linux/amd64 jupyter/datascience-notebook:latest
 MAINTAINER      lucyfer AT cime.net
 
 
