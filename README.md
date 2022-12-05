@@ -299,6 +299,7 @@ Copyright &#169; the Lucyfer Project Contributors
 |----|----------------|
 |Balmos, Scott|[sbalmos](https://github.com/sbalmos)|
 |Ciurana, Eugene|[pr3d4t0r](https://github.com/pr3d4t0r)|
+|Fulgo, Matt|mfulgo|(https://github.com/mfulgo)|
 |Heudecker, Nick|[nheudecker](https://github.com/nheudecker)|
 |Lombardi, Andrew|[kinabalu](https://github.com/kinabalu)|
 |Rook, Vivian||vivian-rook|(https://github.com/vivian-rook)|
