@@ -303,5 +303,6 @@ Copyright &#169; the Lucyfer Project Contributors
 |Heudecker, Nick|[nheudecker](https://github.com/nheudecker)|
 |Lombardi, Andrew|[kinabalu](https://github.com/kinabalu)|
 |Rook, Vivian|[vivian-rook](https://github.com/vivian-rook)|
+|Ottinger, Joe|[jottinger](https://github.com/jottinger)|
 |Ross, Phillip|[phillipross](https://github.com/phillipross)|
 
