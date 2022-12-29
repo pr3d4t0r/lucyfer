@@ -12,18 +12,11 @@ include ./build.mk
 
 
 version:
-	cp "$(DOCKER_IMAGE_VERSION_FILE)" arm64
-	cp "$(DOCKER_IMAGE_VERSION_FILE)" arm64/kallisto
 	cp "$(DOCKER_IMAGE_VERSION_FILE)" kallisto
 
 
 all:
 	make version
-	pushd arm64 && make image && popd
-	pushd arm64 && make push && popd
-	pushd arm64/kallisto && make image && popd
-	pushd arm64/kallisto && make push && popd
-	pushd kallisto && make image && popd
 	pushd kallisto && make push && popd
 	make image
 	make push
