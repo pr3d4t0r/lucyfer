@@ -9,8 +9,17 @@
 LUCY_PRESENT=$(shell if [[ -e "lucy" ]]; then echo "true"; else echo "false"; fi)
 
 image:
-	 docker build --progress=plain --compress --force-rm -t $(DOCKER_IMAGE):$(DOCKER_VERSION) --build-arg LUCYFER_VERSION=$(DOCKER_VERSION) .
+	docker build --progress=plain --compress --force-rm -t $(DOCKER_IMAGE):$(DOCKER_VERSION) --build-arg LUCYFER_VERSION=$(DOCKER_VERSION) .
 	docker tag $(DOCKER_IMAGE):$(DOCKER_VERSION) $(DOCKER_IMAGE):latest
+ifeq ($(LUCY_PRESENT), true)
+	awk -v "version=$(DOCKER_VERSION)" '/^LUCYFER_HUB_VERSION/ { printf("LUCYFER_HUB_VERSION=\"%s\"\n", version); next; } { print; }' lucy > /tmp/lucy && \
+    cat /tmp/lucy > lucy && \
+    rm /tmp/lucy
+endif
+
+
+imagex:
+	docker buildx build --platform linux/amd64,linux/arm64 --compress --progress=plain -t $(DOCKER_IMAGE):$(DOCKER_VERSION) --build-arg LUCYFER_VERSION=$(DOCKER_VERSION) --push .
 ifeq ($(LUCY_PRESENT), true)
 	awk -v "version=$(DOCKER_VERSION)" '/^LUCYFER_HUB_VERSION/ { printf("LUCYFER_HUB_VERSION=\"%s\"\n", version); next; } { print; }' lucy > /tmp/lucy && \
     cat /tmp/lucy > lucy && \

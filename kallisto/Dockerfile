@@ -1,11 +1,7 @@
 # (c) Copyright 2022 Lucyfer Contributors
 
-# vim: set fileencoding=utf-8:
 
-
-# TODO:  Implement buildx in a safe manner
-# docker buildx use lucyfer-builder
-FROM            --platform=linux/amd64 ubuntu:jammy
+FROM            ubuntu:jammy
 MAINTAINER      lucyfer AT cime.net
 
 
@@ -17,7 +13,7 @@ RUN             DEBIAN_FRONTEND=noninteractive && \
                 apt-get update && \
                 apt-get -y upgrade && \
                 apt-get -y --no-install-recommends install locales software-properties-common && \
-                locale-gen ${LC_ALL} 
+                locale-gen ${LC_ALL}
 
 RUN             DEBIAN_FRONTEND=noninteractive && \
                 apt-get -y --no-install-recommends install \
