@@ -1,7 +1,6 @@
-# (c) Copyright 2022 Lucyfer Contributors
-
-
-FROM            ubuntu:jammy
+# TODO:  Implement buildx in a safe manner
+# docker buildx use lucyfer-builder
+FROM            --platform=linux/amd64 ubuntu:jammy
 MAINTAINER      lucyfer AT cime.net
 
 

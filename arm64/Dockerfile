@@ -1,8 +1,5 @@
-# (c) Copyright 2022 Lucyfer Contributors
-
-
 # TODO:  Implement buildx in a safe manner
-FROM            --platform=linux/arm64 jupyter/datascience-notebook:aarch64-latest
+FROM            --platform=linux/arm64 jupyter/scipy-notebook:latest
 MAINTAINER      lucyfer AT cime.net
 
 
@@ -26,7 +23,7 @@ RUN             apt-get update && \
 
 # Integration tools
 RUN             CURRENT_VERSION=$(curl -Ls https://api.github.com/repos/Versent/saml2aws/releases/latest | jq '.tag_name[1:]' | awk '{ gsub("\"", ""); print; }') && \
-                wget -c https://github.com/Versent/saml2aws/releases/download/v${CURRENT_VERSION}/saml2aws_${CURRENT_VERSION}_linux_arm64.tar.gz -O - | tar -xzv -C /usr/local/bin && \
+                wget -c https://github.com/Versent/saml2aws/releases/download/v${CURRENT_VERSION}/saml2aws_${CURRENT_VERSION}_linux_amd64.tar.gz -O - | tar -xzv -C /usr/local/bin && \
                 chmod u+x /usr/local/bin/saml2aws
 
 # Kotlin installation
