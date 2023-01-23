@@ -15,7 +15,7 @@ LUCYFER_GITHUB_FILES=(
     "README-Kotlin.ipynb"
     "lucy" )
 LUCYFER_GITHUB_PATH="https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master"
-LUCYFER_HUB_VERSION="3.1.4"
+LUCYFER_HUB_VERSION="3.1.5"
 
 # Initialize Kallisto constants after Lucyfer because of dependencies.
 KALLISTO_HUB_VERSION="$LUCYFER_HUB_VERSION"
@@ -209,27 +209,21 @@ _snuffContainer() {
 
 
 resolveImageByPlatform() {
-# TODO: Delete this commented out block the next time you see this. if it's
-#      still here after v3.1.5 it means the automatic platform resolution in
-#       Docker works as expected.
+   local platform=$(uname -a | awk 'BEGIN { m = "ARM64"; i = "X86"; } { if ($14 ~ m) print(m); if ($14 ~ i) print(i); }')
 
-#    local platform=$(uname -a | awk 'BEGIN { m = "ARM64"; i = "X86"; } { if ($14 ~ m) print(m); if ($14 ~ i) print(i); }')
-#
-#     case "$platform" in
-#         "ARM64")
-#             export KALLISTO_IMAGE="pr3d4t0r/kallisto-m:$KALLISTO_HUB_VERSION"
-#             export LUCYFER_IMAGE="pr3d4t0r/lucyfer-m:$LUCYFER_HUB_VERSION"
-#             ;;
-#         "X86")
-#             export KALLISTO_IMAGE="pr3d4t0r/kallisto:$KALLISTO_HUB_VERSION"
-#             export LUCYFER_IMAGE="pr3d4t0r/lucyfer:$LUCYFER_HUB_VERSION"
-#             ;;
-#         *)
-#             die "host platform not supported" 7
-#             ;;
-#     esac
-    export KALLISTO_IMAGE="pr3d4t0r/kallisto:$KALLISTO_HUB_VERSION"
-    export LUCYFER_IMAGE="pr3d4t0r/lucyfer:$LUCYFER_HUB_VERSION"
+    case "$platform" in
+        "ARM64")
+            export KALLISTO_IMAGE="pr3d4t0r/kallisto-m:$KALLISTO_HUB_VERSION"
+            export LUCYFER_IMAGE="pr3d4t0r/lucyfer-m:$LUCYFER_HUB_VERSION"
+            ;;
+        "X86")
+            export KALLISTO_IMAGE="pr3d4t0r/kallisto:$KALLISTO_HUB_VERSION"
+            export LUCYFER_IMAGE="pr3d4t0r/lucyfer:$LUCYFER_HUB_VERSION"
+            ;;
+        *)
+            die "host platform not supported" 7
+            ;;
+    esac
 } # resolveImageByPlatform
 
 
