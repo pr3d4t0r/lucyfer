@@ -51,6 +51,7 @@ RUN             pip install -U --requirement /tmp/requirements.txt && \
 
 # ----- Use Vivian Rook's patch because sparqlkernel seems abandoned -----
 RUN             pip install --no-cache-dir git+https://github.com/vivian-rook/sparql-kernel@5df26c96bbf96bd1a60006fa63e563dec7db3285
+RUN             pip install -U rdflib==6.1.1
 RUN             python3 -m jupyter sparqlkernel install --sys-prefix
 # ----- Thank you, rook! -----
 
