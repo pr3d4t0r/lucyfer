@@ -1,5 +1,3 @@
-# (c) Copyright 2022 Lucyfer Contributors
-
 # vim: set fileencoding=utf-8:
 
 
