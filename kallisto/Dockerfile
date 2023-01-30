@@ -1,6 +1,4 @@
-# TODO:  Implement buildx in a safe manner
-# docker buildx use lucyfer-builder
-FROM            --platform=linux/amd64 ubuntu:jammy
+FROM            ubuntu:jammy
 MAINTAINER      lucyfer AT cime.net
 
 

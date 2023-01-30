@@ -15,7 +15,7 @@ LUCYFER_GITHUB_FILES=(
     "README-Kotlin.ipynb"
     "lucy" )
 LUCYFER_GITHUB_PATH="https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master"
-LUCYFER_HUB_VERSION="3.1.6"
+LUCYFER_HUB_VERSION="3.2.0"
 
 # Initialize Kallisto constants after Lucyfer because of dependencies.
 KALLISTO_HUB_VERSION="$LUCYFER_HUB_VERSION"
@@ -107,23 +107,6 @@ assertComponentExists() {
 assertWorkspaceExists() {
     if [[ -z "$LUCYFER_WORKSPACE" ]]
     then
-# --------------------------------------------------
-# TODO:  Deleete this block of code in a future revision
-# cat <<EOF
-#
-# The LUCYFER_WORKSPACE environment variable must point at the fully qualified
-# path to the working directory where the user intends to store Jupyter notebooks
-# and data.  This script links the Jupyter jovyan user $USER to LUCYFER_WORKSPACE
-# for storing state, data, and notebooks.
-#
-# From the command line, do:
-#
-# export LUCYFER_WORKSPACE=/path/to/workspace/dir
-#
-# Where /path/to/workspace/dir is your workspace.
-#
-# EOF
-# --------------------------------------------------
         export LUCYFER_WORKSPACE="$(pwd)"
         echo "LUCYFER_WORKSPACE=$LUCYFER_WORKSPACE"
     fi
@@ -133,23 +116,6 @@ assertWorkspaceExists() {
 assertDataRepositoryExists() {
     if [[ -z "$KALLISTO_DATA" ]]
     then
-# --------------------------------------------------
-# TODO:  Deleete this block of code in a future revision
-# cat << EOF
-#
-# The KALLISTO_DATA environment variable must point at the fully qualified
-# path to the working directory where the user intends to store graph data files.
-# This script links /data in the Blazegraph container to KALLISTO_DATA for
-# storing database configuration and data.
-#
-# From the command line, do:
-#
-# export KALLISTO_DATA=/path/to/data/repository
-#
-# Where /path/to/data/repository is the database work area.
-#
-# EOF
-# --------------------------------------------------
         export KALLISTO_DATA="$(pwd)/data"
         echo "KALLISTO_DATA=$KALLISTO_DATA"
     fi
@@ -209,21 +175,23 @@ _snuffContainer() {
 
 
 resolveImageByPlatform() {
-   local platform=$(uname -a | awk 'BEGIN { m = "ARM64"; i = "X86"; } { if ($14 ~ m) print(m); if ($14 ~ i) print(i); }')
-
-    case "$platform" in
-        "ARM64")
-            export KALLISTO_IMAGE="pr3d4t0r/kallisto-m:$KALLISTO_HUB_VERSION"
-            export LUCYFER_IMAGE="pr3d4t0r/lucyfer-m:$LUCYFER_HUB_VERSION"
-            ;;
-        "X86")
-            export KALLISTO_IMAGE="pr3d4t0r/kallisto:$KALLISTO_HUB_VERSION"
-            export LUCYFER_IMAGE="pr3d4t0r/lucyfer:$LUCYFER_HUB_VERSION"
-            ;;
-        *)
-            die "host platform not supported" 7
-            ;;
-    esac
+#    local platform=$(uname -a | awk 'BEGIN { m = "ARM64"; i = "X86"; } { if ($14 ~ m) print(m); if ($14 ~ i) print(i); }')
+#
+#     case "$platform" in
+#         "ARM64")
+#             export KALLISTO_IMAGE="pr3d4t0r/kallisto-m:$KALLISTO_HUB_VERSION"
+#             export LUCYFER_IMAGE="pr3d4t0r/lucyfer-m:$LUCYFER_HUB_VERSION"
+#             ;;
+#         "X86")
+#             export KALLISTO_IMAGE="pr3d4t0r/kallisto:$KALLISTO_HUB_VERSION"
+#             export LUCYFER_IMAGE="pr3d4t0r/lucyfer:$LUCYFER_HUB_VERSION"
+#             ;;
+#         *)
+#             die "host platform not supported" 7
+#             ;;
+#     esac
+export KALLISTO_IMAGE="pr3d4t0r/kallisto:$KALLISTO_HUB_VERSION"
+export LUCYFER_IMAGE="pr3d4t0r/lucyfer:$LUCYFER_HUB_VERSION"
 } # resolveImageByPlatform
 
 

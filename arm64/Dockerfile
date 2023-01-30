@@ -1,4 +1,5 @@
 # TODO:  Implement buildx in a safe manner
+# FROM            --platform=linux/arm64 jupyter/scipy-notebook:latest
 FROM            --platform=linux/arm64 jupyter/scipy-notebook:latest
 MAINTAINER      lucyfer AT cime.net
 
