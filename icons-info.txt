@@ -1,0 +1,10 @@
+The base directory is:  /opt/conda/lib/python3.10/site-packages/jupyter_server/static
+
+So far found .png and .ico files.
+
+There are also SVG files.
+
+Don't forget to update the <title> to LucyferLab, and similar.
+
+Additional icons from the Jupyter site.
+
