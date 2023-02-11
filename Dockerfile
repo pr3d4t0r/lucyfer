@@ -26,7 +26,12 @@ RUN             CURRENT_VERSION=$(curl -Ls https://api.github.com/repos/Versent/
                 chmod u+x /usr/local/bin/saml2aws
 
 # Kotlin installation
-RUN             apt-get -y install default-jdk
+ARG             JAVA_VERSION=17
+RUN             apt-get -y install gnupg ca-certificates curl && \
+                curl -s https://repos.azul.com/azul-repo.key | gpg --dearmor -o /usr/share/keyrings/azul.gpg && \
+                echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | tee /etc/apt/sources.list.d/zulu.list && \
+                apt-get update && \
+                apt-get -y install zulu${JAVA_VERSION}-jdk
 
 
 COPY            resources/_bash_profile /etc/skel/.bash_profile
