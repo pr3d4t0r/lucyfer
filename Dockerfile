@@ -33,6 +33,8 @@ COPY            resources/_bash_profile /etc/skel/.bash_profile
 COPY            resources/_bash_profile /root/.bash_profile
 COPY            resources/_gitignore /etc/skel/.gitignore
 COPY            resources/_vimrc /etc/skel/.vimrc
+COPY            resources/commands.jupyterlab-settings /etc/skel/.jupyter/lab/user-settings/@jupyterlab/codemirror-extension/commands.jupyterlab-settings
+COPY            resources/themes.jupyterlab-settings   /etc/skel/.jupyter/lab/user-settings/@jupyterlab/apputils-extensions/themes.jupyterlab-settings
 
 RUN             ln -s /usr/bin/batcat /usr/local/bin/bat
 
