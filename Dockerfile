@@ -4,14 +4,17 @@ MAINTAINER      lucyfer AT cime.net
 
 USER            root
 
-RUN             apt-get update && \
+RUN             DEBIAN_FRONTEND=noninteractive && \
+                apt-get update && \
                 apt-get -y upgrade && \
                 apt-get -y install \
                     awscli \
                     bat \
                     bsdmainutils \
+                    ca-certificates \
                     curl \
                     git \
+                    gnupg \
                     graphviz \
                     htop \
                     jq \
@@ -25,13 +28,13 @@ RUN             CURRENT_VERSION=$(curl -Ls https://api.github.com/repos/Versent/
                 wget -c https://github.com/Versent/saml2aws/releases/download/v${CURRENT_VERSION}/saml2aws_${CURRENT_VERSION}_linux_amd64.tar.gz -O - | tar -xzv -C /usr/local/bin && \
                 chmod u+x /usr/local/bin/saml2aws
 
-# Kotlin installation
+# Kotlin installation and Azul's JVM:
 ARG             JAVA_VERSION=17
-RUN             apt-get -y install gnupg ca-certificates curl && \
-                curl -s https://repos.azul.com/azul-repo.key | gpg --dearmor -o /usr/share/keyrings/azul.gpg && \
+RUN             curl -s https://repos.azul.com/azul-repo.key | gpg --dearmor -o /usr/share/keyrings/azul.gpg && \
                 echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | tee /etc/apt/sources.list.d/zulu.list && \
                 apt-get update && \
-                apt-get -y install zulu${JAVA_VERSION}-jdk
+                apt-get -y install zulu${JAVA_VERSION}-jdk && \
+                rm -rf /var/lib/apt/lists/*
 
 
 COPY            resources/_bash_profile /etc/skel/.bash_profile
