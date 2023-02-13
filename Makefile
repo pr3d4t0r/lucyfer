@@ -10,6 +10,8 @@ include ./build.mk
 
 
 version:
+	cp "$(DOCKER_IMAGE_VERSION_FILE)" arm64
+	cp "$(DOCKER_IMAGE_VERSION_FILE)" arm64/kallisto
 	cp "$(DOCKER_IMAGE_VERSION_FILE)" kallisto
 
 

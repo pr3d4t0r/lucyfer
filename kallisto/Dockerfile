@@ -1,4 +1,4 @@
-FROM            ubuntu:jammy
+FROM            --platform=linux/amd64 ubuntu:jammy
 MAINTAINER      lucyfer AT cime.net
 
 

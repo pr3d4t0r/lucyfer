@@ -175,23 +175,23 @@ _snuffContainer() {
 
 
 resolveImageByPlatform() {
-#    local platform=$(uname -a | awk 'BEGIN { m = "ARM64"; i = "X86"; } { if ($14 ~ m) print(m); if ($14 ~ i) print(i); }')
-#
-#     case "$platform" in
-#         "ARM64")
-#             export KALLISTO_IMAGE="pr3d4t0r/kallisto-m:$KALLISTO_HUB_VERSION"
-#             export LUCYFER_IMAGE="pr3d4t0r/lucyfer-m:$LUCYFER_HUB_VERSION"
-#             ;;
-#         "X86")
-#             export KALLISTO_IMAGE="pr3d4t0r/kallisto:$KALLISTO_HUB_VERSION"
-#             export LUCYFER_IMAGE="pr3d4t0r/lucyfer:$LUCYFER_HUB_VERSION"
-#             ;;
-#         *)
-#             die "host platform not supported" 7
-#             ;;
-#     esac
-export KALLISTO_IMAGE="pr3d4t0r/kallisto:$KALLISTO_HUB_VERSION"
-export LUCYFER_IMAGE="pr3d4t0r/lucyfer:$LUCYFER_HUB_VERSION"
+   local platform=$(uname -a | awk 'BEGIN { m = "ARM64"; i = "X86"; } { if ($14 ~ m) print(m); if ($14 ~ i) print(i); }')
+
+    case "$platform" in
+        "ARM64")
+            export KALLISTO_IMAGE="pr3d4t0r/kallisto-m:$KALLISTO_HUB_VERSION"
+            export LUCYFER_IMAGE="pr3d4t0r/lucyfer-m:$LUCYFER_HUB_VERSION"
+            ;;
+        "X86")
+            export KALLISTO_IMAGE="pr3d4t0r/kallisto:$KALLISTO_HUB_VERSION"
+            export LUCYFER_IMAGE="pr3d4t0r/lucyfer:$LUCYFER_HUB_VERSION"
+            ;;
+        *)
+            die "host platform not supported" 7
+            ;;
+    esac
+# export KALLISTO_IMAGE="pr3d4t0r/kallisto:$KALLISTO_HUB_VERSION"
+# export LUCYFER_IMAGE="pr3d4t0r/lucyfer:$LUCYFER_HUB_VERSION"
 } # resolveImageByPlatform
 
 
