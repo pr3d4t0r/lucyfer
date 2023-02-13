@@ -18,6 +18,5 @@ version:
 all:
 	make version
 	pushd kallisto && make image && make build && popd
-	make image
 	make build
 

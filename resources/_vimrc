@@ -24,5 +24,5 @@ highlight Directory ctermfg=lightcyan
 " execute pathogen#infect()
 
 autocmd VimEnter * if len($TERM)| NERDTree | set nu |endif
-autocmd VimEnter * if len($TERM) && argc()|wincmd l|endif
+autocmd VimEnter * if len($TERM) && argc() | wincmd l | endif
 
