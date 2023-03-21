@@ -17,6 +17,8 @@ version:
 
 all:
 	make version
-	pushd kallisto && make image && make build && popd
-	make build
+	pushd arm64 && make image && make push && popd
+	pushd arm64/kallisto && make image && make push && popd
+	pushd kallisto && make image && make push && popd
+	make image && make push
 
