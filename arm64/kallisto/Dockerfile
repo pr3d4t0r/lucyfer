@@ -16,13 +16,20 @@ RUN             DEBIAN_FRONTEND=noninteractive && \
 
 RUN             DEBIAN_FRONTEND=noninteractive && \
                 apt-get -y --no-install-recommends install \
+                    ca-certificates \
                     curl \
-                    default-jdk \
                     git \
+                    gnupg \
                     unzip \
-                    zip && \
-                rm -rf /var/lib/apt/lists/*
+                    zip
 
+# Azul's JVM:
+ARG             JAVA_VERSION=17
+RUN             curl -s https://repos.azul.com/azul-repo.key | gpg --dearmor -o /usr/share/keyrings/azul.gpg && \
+                echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | tee /etc/apt/sources.list.d/zulu.list && \
+                apt-get update && \
+                apt-get -y install zulu${JAVA_VERSION}-jdk && \
+                rm -rf /var/lib/apt/lists/*
 
 # Blazegraph:
 
