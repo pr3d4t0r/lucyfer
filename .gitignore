@@ -130,6 +130,7 @@ dmypy.json
 **.jupyter
 **.local
 **.profile
+**.python_history
 **.ssh/
 **.viminfo
 **.vimrc
