@@ -39,6 +39,10 @@ RUN             curl -s https://repos.azul.com/azul-repo.key | gpg --dearmor -o 
                 rm -rf /var/lib/apt/lists/*
 
 
+# Clean up
+RUN             apt-get clean && rm -Rf /var/lib/apt/lists/*
+
+
 COPY            resources/_bash_profile /etc/skel/.bash_profile
 COPY            resources/_bash_profile /root/.bash_profile
 COPY            resources/_gitignore /etc/skel/.gitignore
@@ -48,9 +52,20 @@ COPY            resources/themes.jupyterlab-settings   /etc/skel/.jupyter/lab/us
 
 RUN             ln -s /usr/bin/batcat /usr/local/bin/bat
 
+
 # ----------------------------------------
 
 USER            jovyan
+
+# *** FIX /tree
+# See:  https://discourse.jupyter.org/t/jupyterhub-4-0-1-always-redirecting-to-tree-instead-of-lab-on-login-despite-setting-spawner-default-url/20539/3
+#       Required notebook 7.0.2 to override the screw up in 7.0.1
+#
+# Fix with:  https://github.com/pr3d4t0r/lucyfer/issues/103
+
+RUN             pip install -U notebook==7.0.2 \
+                    notebook_shim==0.2.3
+# ----------------------------------------
 
 # Tools:
 COPY            --chown=${NB_UID}:${NB_GID} resources/requirements.txt /tmp/

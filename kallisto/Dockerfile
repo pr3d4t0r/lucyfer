@@ -29,6 +29,10 @@ RUN             curl -s https://repos.azul.com/azul-repo.key | gpg --dearmor -o 
                 apt-get -y install zulu${JAVA_VERSION}-jdk && \
                 rm -rf /var/lib/apt/lists/*
 
+# Clean up
+RUN             apt-get clean && rm -Rf /var/lib/apt/lists/*
+
+
 # Blazegraph:
 ENV             BLAZEGRAPH_HOME="/var/blazegraph"
 RUN             mkdir -p "${BLAZEGRAPH_HOME}"
