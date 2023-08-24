@@ -139,6 +139,7 @@ dmypy.json
 **/.cufflinks*
 **/.lesshst
 **/.npm/*
+**/.python_history
 **/.theano
 **/.vim/*
 **/database/*
