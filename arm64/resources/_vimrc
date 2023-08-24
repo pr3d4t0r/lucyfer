@@ -1,5 +1,4 @@
 " .vimrc - nothing special here.
-"color elflord
 syntax on
 set ai
 set nu
@@ -18,8 +17,8 @@ set hlsearch
 set fo-=o
 set fo-=c
 set fo-=r
-color desert
-
+color blue
+highlight Directory ctermfg=lightcyan
 
 " Pathogen support:
 " execute pathogen#infect()

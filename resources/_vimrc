@@ -17,12 +17,9 @@ set hlsearch
 set fo-=o
 set fo-=c
 set fo-=r
-color darkblue
+color blue
 highlight Directory ctermfg=lightcyan
 
 " Pathogen support:
 " execute pathogen#infect()
-
-autocmd VimEnter * if len($TERM)| NERDTree | set nu |endif
-autocmd VimEnter * if len($TERM) && argc()|wincmd l|endif
 
