@@ -1,5 +1,4 @@
 # TODO:  Implement buildx in a safe manner
-# FROM            --platform=linux/arm64 jupyter/scipy-notebook:latest
 FROM            --platform=linux/arm64 jupyter/scipy-notebook:latest
 MAINTAINER      lucyfer AT cime.net
 
@@ -63,9 +62,6 @@ USER            jovyan
 #
 # Fix with:  https://github.com/pr3d4t0r/lucyfer/issues/103
 
-RUN             pip install -U notebook==7.0.2 \
-                    notebook_shim==0.2.3
-# ----------------------------------------
 
 # Tools:
 COPY            --chown=${NB_UID}:${NB_GID} resources/requirements.txt /tmp/
