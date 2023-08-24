@@ -55,13 +55,6 @@ RUN             ln -s /usr/bin/batcat /usr/local/bin/bat
 
 USER            jovyan
 
-# *** FIX /tree
-# See:  https://discourse.jupyter.org/t/jupyterhub-4-0-1-always-redirecting-to-tree-instead-of-lab-on-login-despite-setting-spawner-default-url/20539/3
-#       Required notebook 7.0.2 to override the screw up in 7.0.1
-#
-# Fix with:  https://github.com/pr3d4t0r/lucyfer/issues/103
-
-
 # Tools:
 COPY            --chown=${NB_UID}:${NB_GID} resources/requirements.txt /tmp/
 RUN             pip install -U --requirement /tmp/requirements.txt && \
