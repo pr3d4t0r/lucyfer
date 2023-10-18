@@ -1,5 +1,4 @@
-# vim: set fileencoding=utf-8:
-
+# License:  https://raw.githubusercontent.com/pr3d4t0r/lucyfer/0109-bug-extraneous-env-vars/LICENSE.txt
 
 DOCKER_IMAGE_NAME_FILE=dockerimagename.txt
 DOCKER_IMAGE_VERSION_FILE=dockerimageversion.txt
