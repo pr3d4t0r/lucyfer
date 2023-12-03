@@ -1,3 +1,5 @@
+# License:  https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/LICENSE.txt
+
 FROM            --platform=linux/amd64 jupyter/scipy-notebook:latest
 MAINTAINER      lucyfer AT cime.net
 

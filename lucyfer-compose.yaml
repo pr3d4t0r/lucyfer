@@ -1,7 +1,4 @@
-# (c) Copyright 2022 by the Lucyfer Contributors
-
-# vim: set fileencoding=utf-8:
-
+# License:  https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/LICENSE.txt
 
 version: '3'
 
@@ -56,7 +53,6 @@ services:
         environment:
             BLAZEGRAPH_UID: '${BLAZEGRAPH_UID}'
             BLAZEGRAPH_GID: '${BLAZEGRAPH_GID}'
-        # TODO:  Parameterize the image:
         image: '${KALLISTO_IMAGE}'
         ports:
             # - '127.0.0.1:8809:9999'

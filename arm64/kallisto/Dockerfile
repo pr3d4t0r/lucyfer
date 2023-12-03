@@ -1,5 +1,5 @@
-# TODO:  Implement buildx in a safe manner
-# docker buildx use lucyfer-builder
+# License:  https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/LICENSE.txt
+
 FROM            --platform=linux/arm64 ubuntu:jammy
 MAINTAINER      lucyfer AT cime.net
 

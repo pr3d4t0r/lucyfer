@@ -6,13 +6,14 @@ set -e
 
 # +++ constants +++
 
+DEFAULT_SERVICE="lucyfer_service"
 LUCYFER_GITHUB_FILES=(
     "README-1ST.ipynb"
     "README-SPARQL.ipynb"
     "README-Kotlin.ipynb"
     "lucy" )
 LUCYFER_GITHUB_PATH="https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master"
-LUCYFER_HUB_VERSION="3.3.6"
+LUCYFER_HUB_VERSION="3.3.7"
 
 # Initialize Kallisto constants after Lucyfer because of dependencies.
 KALLISTO_HUB_VERSION="$LUCYFER_HUB_VERSION"
@@ -232,7 +233,7 @@ runLucyferLab() {
         local service="$container""_service"
         docker-compose -f "$LUCYFER_COMPOSE" up --remove-orphans --no-recreate -d "$service" || docker-compose rm -f
     else
-        docker-compose -f "$LUCYFER_COMPOSE" up --remove-orphans --no-recreate -d || docker-compose rm -f
+        docker-compose -f "$LUCYFER_COMPOSE" up --remove-orphans --no-recreate -d "$DEFAULT_SERVICE" || docker-compose rm -f
     fi
     # TODO: replace with an actual check to see if the container started/is healthy
 
