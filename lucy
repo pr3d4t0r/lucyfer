@@ -7,16 +7,14 @@ set -e
 # +++ constants +++
 
 DEFAULT_SERVICE="lucyfer_service"
+KALLISTO_HUB_VERSION="3.3.8"
 LUCYFER_GITHUB_FILES=(
     "README-1ST.ipynb"
     "README-SPARQL.ipynb"
     "README-Kotlin.ipynb"
     "lucy" )
 LUCYFER_GITHUB_PATH="https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master"
-LUCYFER_HUB_VERSION="3.3.7"
-
-# Initialize Kallisto constants after Lucyfer because of dependencies.
-KALLISTO_HUB_VERSION="$LUCYFER_HUB_VERSION"
+LUCYFER_HUB_VERSION="3.3.8"
 
 
 # *** functions ***
@@ -188,8 +186,6 @@ resolveImageByPlatform() {
             die "host platform not supported" 7
             ;;
     esac
-# export KALLISTO_IMAGE="pr3d4t0r/kallisto:$KALLISTO_HUB_VERSION"
-# export LUCYFER_IMAGE="pr3d4t0r/lucyfer:$LUCYFER_HUB_VERSION"
 } # resolveImageByPlatform
 
 
@@ -283,7 +279,9 @@ _fetchFileFrom() {
 update() {
     local fileName
     local fullURL
+    local kallistoNewest
     local localPath
+    local lucyNewest
 
     for fileName in ${LUCYFER_GITHUB_FILES[@]}
     do
@@ -295,11 +293,14 @@ update() {
         echo ""
     done
 
-    # Heuristic:
     chmod +x "./lucy"
 
-    docker pull "$LUCYFER_IMAGE"
-    docker pull "$KALLISTO_IMAGE"
+    # Pull corresponding image from the hub:
+    kallistoNewest=$(awk -v "i=$KALLISTO_IMAGE" -F "\"" '/KALLISTO_HUB_VERSION=/ && !/awk/ { split(i, b, ":"); printf("%s:%s\n", b[1], $2); }' ./lucy)
+    lucyNewest=$(awk -v "i=$LUCYFER_IMAGE" -F "\"" '/LUCYFER_HUB_VERSION=/ && !/awk/ { split(i, b, ":"); printf("%s:%s\n", b[1], $2); }' ./lucy)
+
+    docker pull "$lucyNewest"
+    docker pull "$kallistoNewest"
 
     echo "Lucyfer update complete"
 } # update
