@@ -59,9 +59,15 @@ USER            jovyan
 
 # Tools:
 COPY            --chown=${NB_UID}:${NB_GID} resources/requirements.txt /tmp/
-RUN             pip install -U --requirement /tmp/requirements.txt && \
-                    fix-permissions "${CONDA_DIR}" && \
-                    fix-permissions "/home/${NB_USER}"
+# TODO:         fix-permissions doesn't have any effect on a hosted account
+#               where $HOME ::= the user's dev directory.  Decide if we keep
+#               the fix-permissions calls here or do away with them altogether.
+# RUN             pip install -U --requirement /tmp/requirements.txt && \
+#                     fix-permissions "${CONDA_DIR}" && \
+#                     fix-permissions "/home/${NB_USER}"
+RUN             pip install -U --requirement /tmp/requirements.txt
+# RUN                 fix-permissions "${CONDA_DIR}"
+# RUN                 fix-permissions "/home/${NB_USER}"
 
 # SPARQL kernel support
 
