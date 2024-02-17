@@ -14,7 +14,7 @@ LUCYFER_GITHUB_FILES=(
     "README-Kotlin.ipynb"
     "lucy" )
 LUCYFER_GITHUB_PATH="https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master"
-LUCYFER_HUB_VERSION="3.3.10"
+LUCYFER_HUB_VERSION="3.4.0-T"
 
 
 # *** functions ***
