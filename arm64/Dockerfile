@@ -31,7 +31,7 @@ RUN             CURRENT_VERSION=$(curl -Ls https://api.github.com/repos/Versent/
                 chmod u+x /usr/local/bin/saml2aws
 
 # Kotlin installation and Azul's JVM:
-ARG             JAVA_VERSION=17
+ARG             JAVA_VERSION=21
 RUN             curl -s https://repos.azul.com/azul-repo.key | gpg --dearmor -o /usr/share/keyrings/azul.gpg && \
                 echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | tee /etc/apt/sources.list.d/zulu.list && \
                 apt-get update && \
