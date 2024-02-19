@@ -1,4 +1,4 @@
-# Lucyfer
+# Lucyfer 3.4.0
 
 Lucyfer is a specialization of the official [Jupyter Datascience Notebook Docker
 image](https://hub.docker.com/r/jupyter/datascience-notebook/tags/) that brings
@@ -19,7 +19,6 @@ engineers to work off the same code base and use the same tools.**
 - Kotlin kernel for state-of-the-art interactive JVM REPL and exploration
 - `jq`
 - `pudb`, linters, devpi, `pytest`, `plotly`, and data handling Python tools
-- `rclone` for synchronizing data lakes between host and remote systems
 - `ssh`
 - `tree` (file system visualization)
 - Vim with NERDTree and other dev tools

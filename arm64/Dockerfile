@@ -9,7 +9,7 @@ USER            root
 RUN             DEBIAN_FRONTEND=noninteractive && \
                 apt-get update && \
                 apt-get -y upgrade && \
-                apt-get -y install \
+                apt-get -y --no-install-recommends install \
                     awscli \
                     bat \
                     bsdmainutils \
@@ -18,12 +18,12 @@ RUN             DEBIAN_FRONTEND=noninteractive && \
                     git \
                     gnupg \
                     graphviz \
-                    htop \
                     jq \
-                    rclone \
                     ssh \
                     tree \
-                    vim
+                    vim \
+                    && apt-get autoremove && apt-get clean && rm -Rf /var/lib/apt/lists/*
+
 
 # Integration tools
 RUN             CURRENT_VERSION=$(curl -Ls https://api.github.com/repos/Versent/saml2aws/releases/latest | jq '.tag_name[1:]' | awk '{ gsub("\"", ""); print; }') && \
@@ -31,16 +31,12 @@ RUN             CURRENT_VERSION=$(curl -Ls https://api.github.com/repos/Versent/
                 chmod u+x /usr/local/bin/saml2aws
 
 # Kotlin installation and Azul's JVM:
-ARG             JAVA_VERSION=17
+ARG             JAVA_VERSION=21
 RUN             curl -s https://repos.azul.com/azul-repo.key | gpg --dearmor -o /usr/share/keyrings/azul.gpg && \
                 echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | tee /etc/apt/sources.list.d/zulu.list && \
                 apt-get update && \
-                apt-get -y install zulu${JAVA_VERSION}-jdk && \
-                rm -rf /var/lib/apt/lists/*
-
-
-# Clean up
-RUN             apt-get clean && rm -Rf /var/lib/apt/lists/*
+                apt-get -y --no-install-recommends install zulu${JAVA_VERSION}-jre-headless && \
+                apt-get autoremove && apt-get clean && rm -Rf /var/lib/apt/lists/*
 
 
 COPY            resources/_bash_profile /etc/skel/.bash_profile
@@ -59,15 +55,7 @@ USER            jovyan
 
 # Tools:
 COPY            --chown=${NB_UID}:${NB_GID} resources/requirements.txt /tmp/
-# TODO:         fix-permissions doesn't have any effect on a hosted account
-#               where $HOME ::= the user's dev directory.  Decide if we keep
-#               the fix-permissions calls here or do away with them altogether.
-# RUN             pip install -U --requirement /tmp/requirements.txt && \
-#                     fix-permissions "${CONDA_DIR}" && \
-#                     fix-permissions "/home/${NB_USER}"
 RUN             pip install -U --requirement /tmp/requirements.txt
-# RUN                 fix-permissions "${CONDA_DIR}"
-# RUN                 fix-permissions "/home/${NB_USER}"
 
 # SPARQL kernel support
 
