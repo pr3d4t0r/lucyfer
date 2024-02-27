@@ -3,6 +3,7 @@
 LUCY_PRESENT=$(shell if [[ -e "lucy" ]]; then echo "true"; else echo "false"; fi)
 
 image:
+	docker pull quay.io/jupyter/scipy-notebook:latest
 	docker build --progress=plain --compress --force-rm -t $(DOCKER_IMAGE):$(DOCKER_VERSION) --build-arg LUCYFER_VERSION=$(DOCKER_VERSION) .
 	docker tag $(DOCKER_IMAGE):$(DOCKER_VERSION) $(DOCKER_IMAGE):latest
 ifeq ($(LUCY_PRESENT), true)
