@@ -7,14 +7,14 @@ set -e
 # +++ constants +++
 
 DEFAULT_SERVICE="lucyfer_service"
-KALLISTO_HUB_VERSION="3.5.0"
+KALLISTO_HUB_VERSION="3.5.1"
 LUCYFER_GITHUB_FILES=(
     "README-1ST.ipynb"
     "README-SPARQL.ipynb"
     "README-Kotlin.ipynb"
     "lucy" )
 LUCYFER_GITHUB_PATH="https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master"
-LUCYFER_HUB_VERSION="3.5.0"
+LUCYFER_HUB_VERSION="3.5.1"
 
 
 # *** functions ***
@@ -287,10 +287,14 @@ update() {
     do
         fullURL="$LUCYFER_GITHUB_PATH/$fileName"
         localPath="./$fileName"
-        echo ">> $fullURL"
-        echo [[ -e "$localPath" ]] && rm -f "$localPath"
-        _fetchFileFrom "$fullURL" "$localPath"
-        echo ""
+
+        if [[ -f "$localPath" ]]
+        then
+            echo ">> $fullURL"
+            echo [[ -e "$localPath" ]] && rm -f "$localPath"
+            _fetchFileFrom "$fullURL" "$localPath"
+            echo ""
+        fi
     done
 
     chmod +x "./lucy"
