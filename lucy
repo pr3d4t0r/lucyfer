@@ -7,14 +7,13 @@ set -e
 # +++ constants +++
 
 DEFAULT_SERVICE="lucyfer_service"
-KALLISTO_HUB_VERSION="3.5.1"
+KALLISTO_HUB_VERSION="3.6.0"
 LUCYFER_GITHUB_FILES=(
     "README-1ST.ipynb"
-    "README-SPARQL.ipynb"
     "README-Kotlin.ipynb"
     "lucy" )
 LUCYFER_GITHUB_PATH="https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master"
-LUCYFER_HUB_VERSION="3.5.1"
+LUCYFER_HUB_VERSION="3.6.0"
 
 
 # *** functions ***
@@ -325,7 +324,7 @@ neuterInstallation() {
         docker rm -f lucyfer kallisto
         rm -vf ./.bash* ./.vimrc ./.viminfo ./kallisto-compose.yaml ./lucyfer-compose.yaml ./mornyng-compose.yaml ./.lesshst ./lucy ./.profile
         rm -Rvf "./.local" "./.ipython" "./.vim" "./.ssh" "./.idea" "./.m2" "./.npm" "./.config" "./.cache" "./.jupyter" "./.ipynb_checkpoints"
-        rm -Rfv ./README-1ST.ipynb    ./README-Kotlin.ipynb ./README-SPARQL.ipynb
+        rm -Rfv ./README-1ST.ipynb ./README-Kotlin.ipynb
         docker ps -a
         echo "Lucyfer was neutered"
     else

@@ -27,7 +27,6 @@ esac
 alias env='env | sort'
 alias grep='grep --color'
 alias ls='ls --color'
-alias pudb=pudb3
 alias pytest='pytest -v'
 alias sha2='sha256sum'
 

@@ -1,4 +1,4 @@
-# Lucyfer 3.5.2
+# Lucyfer 3.6.0
 
 Lucyfer is a specialization of the official [Jupyter Datascience Notebook Docker
 image](https://hub.docker.com/r/jupyter/datascience-notebook/tags/) that brings
@@ -15,7 +15,6 @@ engineers to work off the same code base and use the same tools.**
 ## Features
 
 - Git support
-- SPARQL kernel for interactive dataset exploration
 - Kotlin kernel for state-of-the-art interactive JVM REPL and exploration
 - `jq`
 - `pudb`, linters, devpi, `pytest`, `plotly`, and data handling Python tools
@@ -30,11 +29,10 @@ Jupyter image and enables `pip` package installation.
 ### Important
 
 The `lucyfer` image is a specialization of `jupyter/datascience-notebook` and
-runs on x86 processors.  It supports Python, Julia, Kotlin, R, and SPARQL
-kernels.
+runs on x86 processors.  It supports Python, Julia, Kotlin, and R kernels.
 
 The `lucyfer-m` image is a specialization of `jupyter/scipy-notebook` and runs
-on ARM64 processors.  It only supports Python, Kotlin, and SPARQL kernels.
+on ARM64 processors.  It only supports Python, and Kotlin kernels.
 
 
 ---
@@ -82,7 +80,6 @@ Get the starter files from the Lucyfer project at GitHub and execute the runner:
 wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/lucyfer-compose.yaml && \
 wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/README-1ST.ipynb && \
 wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/README-Kotlin.ipynb && \
-wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/README-SPARQL.ipynb && \
 wget https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/lucy && \
 chmod +x ./lucy && \
 ./lucy start
@@ -96,7 +93,6 @@ chmod +x ./lucy && \
 curl -o lucyfer-compose.yaml https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/lucyfer-compose.yaml && \
 curl -o README-1ST.ipynb https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/README-1ST.ipynb && \
 curl -o README-Kotlin.ipynb https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/README-Kotlin.ipynb && \
-curl -o README-SPARQL.ipynb https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/README-SPARQL.ipynb && \
 curl -o lucy https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/lucy && \
 chmod +x ./lucy && \
 ./lucy start
