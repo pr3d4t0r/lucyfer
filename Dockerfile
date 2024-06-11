@@ -1,6 +1,7 @@
 # License:  https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/LICENSE.txt
+# Images:  https://quay.io/repository/jupyter/scipy-notebook?tab=tags
 
-FROM            --platform=linux/amd64 quay.io/jupyter/scipy-notebook:lab-4.1.5
+FROM            --platform=linux/amd64 quay.io/jupyter/scipy-notebook:2024-06-10
 MAINTAINER      lucyfer AT cime.net
 
 
