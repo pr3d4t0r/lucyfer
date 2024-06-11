@@ -1,6 +1,7 @@
 # License:  https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/LICENSE.txt
+# Images:  https://quay.io/repository/jupyter/scipy-notebook?tab=tags
 
-FROM            --platform=linux/amd64 quay.io/jupyter/scipy-notebook:lab-4.1.5
+FROM            --platform=linux/amd64 quay.io/jupyter/scipy-notebook:2024-06-10
 MAINTAINER      lucyfer AT cime.net
 
 
@@ -17,7 +18,6 @@ RUN             DEBIAN_FRONTEND=noninteractive && \
                     curl \
                     git \
                     gnupg \
-                    graphviz \
                     jq \
                     ssh \
                     tree \
@@ -56,15 +56,6 @@ USER            jovyan
 # Tools:
 COPY            --chown=${NB_UID}:${NB_GID} resources/requirements.txt /tmp/
 RUN             pip install -U --requirement /tmp/requirements.txt
-
-# SPARQL kernel support
-
-# ----- Use Vivian Rook's patch because sparqlkernel seems abandoned -----
-RUN             pip install --no-cache-dir git+https://github.com/vivian-rook/sparql-kernel@5df26c96bbf96bd1a60006fa63e563dec7db3285
-RUN             pip install -U rdflib==6.1.1
-RUN             python3 -m jupyter sparqlkernel install --sys-prefix
-# ----- Thank you, rook! -----
-
 
 # Kotlin kernel support
 RUN             pip install kotlin-jupyter-kernel
