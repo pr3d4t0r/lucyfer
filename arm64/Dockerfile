@@ -1,8 +1,9 @@
 # License:  https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/LICENSE.txt
 # Images:  https://quay.io/repository/jupyter/scipy-notebook?tab=tags
 
-FROM            --platform=linux/arm64 quay.io/jupyter/scipy-notebook:2024-06-10
-MAINTAINER      lucyfer AT cime.net
+ARG             PLATFORM="linux/aarch64"
+FROM            --platform=$PLATFORM quay.io/jupyter/scipy-notebook:lab-4.2.5
+LABEL           maintainer="lucyfer AT cime.net"
 
 
 USER            root
@@ -11,7 +12,6 @@ RUN             DEBIAN_FRONTEND=noninteractive && \
                 apt-get update && \
                 apt-get -y upgrade && \
                 apt-get -y --no-install-recommends install \
-                    awscli \
                     bat \
                     bsdmainutils \
                     ca-certificates \
@@ -29,6 +29,17 @@ RUN             DEBIAN_FRONTEND=noninteractive && \
 RUN             CURRENT_VERSION=$(curl -Ls https://api.github.com/repos/Versent/saml2aws/releases/latest | jq '.tag_name[1:]' | awk '{ gsub("\"", ""); print; }') && \
                 wget -c https://github.com/Versent/saml2aws/releases/download/v${CURRENT_VERSION}/saml2aws_${CURRENT_VERSION}_linux_amd64.tar.gz -O - | tar -xzv -C /usr/local/bin && \
                 chmod u+x /usr/local/bin/saml2aws
+
+# --- NB:  AWS dropped support for awscli from Ubuntu and Debian repositories
+#          and only supports installation from snap.  As of this writing, the
+#          recommended installation method is to do a CLI installation:
+#
+#          https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+#
+#          There's no current requirement to support awscli in Lucyfer.  If
+#          needed add an issue in GitHub.
+#
+#          TODO:  remove this whole section if it's still present after 20250101
 
 # Kotlin installation and Azul's JVM:
 ARG             JAVA_VERSION=21
