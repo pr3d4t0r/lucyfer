@@ -7,13 +7,13 @@ set -e
 # +++ constants +++
 
 DEFAULT_SERVICE="lucyfer_service"
-KALLISTO_HUB_VERSION="3.6.3"
+KALLISTO_HUB_VERSION="3.6.4"
 LUCYFER_GITHUB_FILES=(
     "README-1ST.ipynb"
     "README-Kotlin.ipynb"
     "lucy" )
 LUCYFER_GITHUB_PATH="https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master"
-LUCYFER_HUB_VERSION="3.6.3"
+LUCYFER_HUB_VERSION="3.6.4"
 
 
 # *** functions ***
@@ -70,7 +70,7 @@ assertDockerServiceIsRunning() {
 
 
 assertDockerIsAvailable() {
-    which docker-compose > /dev/null || die "docker-compose unavailable or not in path" 1
+    which docker > /dev/null || die "docker unavailable or not in path" 1
 } # assertDockerIsAvailable
 
 
@@ -190,7 +190,7 @@ resolveImageByPlatform() {
 
 showLucyferLab() {
     echo ""
-    docker-compose -f "$LUCYFER_COMPOSE" ps -a
+    docker compose -f "$LUCYFER_COMPOSE" ps -a
 } # showLucyferLab
 
 
@@ -226,9 +226,9 @@ runLucyferLab() {
     if [[ -n "$container" ]]
     then
         local service="$container""_service"
-        docker-compose -f "$LUCYFER_COMPOSE" up --remove-orphans --no-recreate -d "$service" || docker-compose rm -f
+        docker compose -f "$LUCYFER_COMPOSE" up --remove-orphans --no-recreate -d "$service" || docker compose rm -f
     else
-        docker-compose -f "$LUCYFER_COMPOSE" up --remove-orphans --no-recreate -d "$DEFAULT_SERVICE" || docker-compose rm -f
+        docker compose -f "$LUCYFER_COMPOSE" up --remove-orphans --no-recreate -d "$DEFAULT_SERVICE" || docker compose rm -f
     fi
     # TODO: replace with an actual check to see if the container started/is healthy
 
@@ -245,9 +245,9 @@ killLucyferLab() {
     if [[ -n "$container" ]]
     then
         local service="$container""_service"
-        docker-compose -f "$LUCYFER_COMPOSE" stop "$service"
+        docker compose -f "$LUCYFER_COMPOSE" stop "$service"
     else
-        docker-compose -f "$LUCYFER_COMPOSE" stop
+        docker compose -f "$LUCYFER_COMPOSE" stop
     fi
     showLucyferLab
 } # killLucyferLab
