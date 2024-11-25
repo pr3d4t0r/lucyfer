@@ -1,7 +1,5 @@
 # License:  https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master/LICENSE.txt
 
-version: '3'
-
 # IMPORTANT:
 # By convention, Lucyfer service names must always be a pastiche of the
 # container name, underscore, and the word service:

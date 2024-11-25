@@ -1,4 +1,4 @@
-# Lucyfer 3.6.4
+# Lucyfer 3.6.5
 
 Lucyfer is a specialization of the official [Jupyter Datascience Notebook Docker
 image](https://hub.docker.com/r/jupyter/datascience-notebook/tags/) that brings
