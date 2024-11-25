@@ -2,7 +2,7 @@
 # Images:  https://quay.io/repository/jupyter/scipy-notebook?tab=tags
 
 ARG             PLATFORM="linux/amd64"
-FROM            --platform=$PLATFORM quay.io/jupyter/scipy-notebook:lab-4.2.5
+FROM            --platform=$PLATFORM quay.io/jupyter/scipy-notebook:lab-4.2.6
 LABEL           maintainer="lucyfer AT cime.net"
 
 
