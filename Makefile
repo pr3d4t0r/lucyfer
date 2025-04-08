@@ -19,6 +19,10 @@ clean:
 	docker image rm -f $$(docker image ls | awk '/none/ { print($$3); }')
 
 
+prune:
+	for f in $$(git branch | awk '!/master/ && !/main/ && !/^\*/ && !/local-work/ { print; }'); do git branch -D "$$f"; done
+
+
 version:
 	cp "$(DOCKER_IMAGE_VERSION_FILE)" arm64
 	awk -v "version=${DOCKER_VERSION}" \
