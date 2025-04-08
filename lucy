@@ -7,7 +7,6 @@ set -e
 # +++ constants +++
 
 DEFAULT_SERVICE="lucyfer_service"
-KALLISTO_HUB_VERSION="3.6.6"
 LUCYFER_GITHUB_FILES=(
     "README-1ST.ipynb"
     "README-Kotlin.ipynb"
@@ -90,8 +89,6 @@ assertComponentExists() {
             ;;
         "lucyfer")
             ;;
-        "kallisto")
-            ;;
         *)
             awk -F "'" 'BEGIN { print("Available lucyfer containers:\n"); } /container_name/ { printf("* %s\n", $2); } END { print(""); }' "$LUCYFER_COMPOSE"
             die "Container $container not found" 11
@@ -106,17 +103,6 @@ assertWorkspaceExists() {
         echo "LUCYFER_WORKSPACE=$LUCYFER_WORKSPACE"
     fi
 } # assertWorkspaceExists
-
-
-assertDataRepositoryExists() {
-    if [[ -z "$KALLISTO_DATA" ]]
-    then
-        export KALLISTO_DATA="$(pwd)/data"
-        echo "KALLISTO_DATA=$KALLISTO_DATA"
-    fi
-
-    mkdir -p "$KALLISTO_DATA"
-} # assertDataRepositoryExists
 
 
 setOwnership() {
@@ -140,11 +126,6 @@ setHostPorts() {
     if [[ -z "$LUCYFER_PORT" ]]
     then
         export LUCYFER_PORT="8805"
-    fi
-
-    if [[ -z "$KALLISTO_PORT" ]]
-    then
-        export KALLISTO_PORT="8808"
     fi
 } # setHostPorts
 
@@ -174,11 +155,9 @@ resolveImageByPlatform() {
 
     case "$platform" in
         "ARM64")
-            export KALLISTO_IMAGE="pr3d4t0r/kallisto-m:$KALLISTO_HUB_VERSION"
             export LUCYFER_IMAGE="pr3d4t0r/lucyfer-m:$LUCYFER_HUB_VERSION"
             ;;
         "X86")
-            export KALLISTO_IMAGE="pr3d4t0r/kallisto:$KALLISTO_HUB_VERSION"
             export LUCYFER_IMAGE="pr3d4t0r/lucyfer:$LUCYFER_HUB_VERSION"
             ;;
         *)
@@ -219,10 +198,9 @@ showToken() {
 
 runLucyferLab() {
     _snuffContainer "lucyfer"
-    _snuffContainer "kallisto"
 
     echo ""
-    env | awk '/LUCYFER/ || /JUPYTER/ || /HOME/ || /BLAZE/ || /KALLISTO/' | sort
+    env | awk '/LUCYFER/ || /JUPYTER/ || /HOME/ || /BLAZE/' | sort
     if [[ -n "$container" ]]
     then
         local service="$container""_service"
@@ -241,7 +219,7 @@ runLucyferLab() {
 
 killLucyferLab() {
     echo ""
-    env | awk '/LUCYFER/ || /JUPYTER/ || /HOME/ || /BLAZE/ || /KALLISTO/' | sort
+    env | awk '/LUCYFER/ || /JUPYTER/ || /HOME/ || /BLAZE/' | sort
     if [[ -n "$container" ]]
     then
         local service="$container""_service"
@@ -255,7 +233,6 @@ killLucyferLab() {
 
 displayEnvironment() {
     echo "export LUCYFER_WORKSPACE=$(pwd)"
-    echo "export KALLISTO_DATA=$(pwd)/data"
 } # displayEnvironment
 
 
@@ -278,7 +255,6 @@ _fetchFileFrom() {
 update() {
     local fileName
     local fullURL
-    local kallistoNewest
     local localPath
     local lucyNewest
 
@@ -299,11 +275,9 @@ update() {
     chmod +x "./lucy"
 
     # Pull corresponding image from the hub:
-    kallistoNewest=$(awk -v "i=$KALLISTO_IMAGE" -F "\"" '/KALLISTO_HUB_VERSION=/ && !/awk/ { split(i, b, ":"); printf("%s:%s\n", b[1], $2); }' ./lucy)
     lucyNewest=$(awk -v "i=$LUCYFER_IMAGE" -F "\"" '/LUCYFER_HUB_VERSION=/ && !/awk/ { split(i, b, ":"); printf("%s:%s\n", b[1], $2); }' ./lucy)
 
     docker pull "$lucyNewest"
-    docker pull "$kallistoNewest"
 
     echo "Lucyfer update complete"
 } # update
@@ -321,8 +295,7 @@ neuterInstallation() {
     if [[ "$answer" == "yes" ]]
     then
         ./lucy stop
-        docker rm -f lucyfer kallisto
-        rm -vf ./.bash* ./.vimrc ./.viminfo ./kallisto-compose.yaml ./lucyfer-compose.yaml ./mornyng-compose.yaml ./.lesshst ./lucy ./.profile
+        rm -vf ./.bash* ./.vimrc ./.viminfo ./lucyfer-compose.yaml ./mornyng-compose.yaml ./.lesshst ./lucy ./.profile
         rm -Rvf "./.local" "./.ipython" "./.vim" "./.ssh" "./.idea" "./.m2" "./.npm" "./.config" "./.cache" "./.jupyter" "./.ipynb_checkpoints"
         rm -Rfv ./README-1ST.ipynb ./README-Kotlin.ipynb
         docker ps -a
@@ -344,7 +317,6 @@ assertDockerIsAvailable
 assertDockerComposeFileExists
 assertComponentExists
 assertWorkspaceExists
-assertDataRepositoryExists
 setOwnership
 setHostPorts
 setOpenOnStart
