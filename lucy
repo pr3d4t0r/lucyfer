@@ -115,8 +115,6 @@ setOwnership() {
     #
     # Documented method because Docker permissions and ownership
     # kinda suck.
-    export BLAZEGRAPH_GID=$(id -g)
-    export BLAZEGRAPH_UID=$(id -u)
     export JUPYTER_LAB_GID=$(id -g)
     export JUPYTER_LAB_UID=$(id -u)
 } # setOwnership
