@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# vim: set fileencoding=utf-8:
-
-
 # *** functions ***
 
 function setJupyterWorkspacePermissions {

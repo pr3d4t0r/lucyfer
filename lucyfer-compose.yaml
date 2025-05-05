@@ -46,16 +46,3 @@ services:
         volumes:
             - '${LUCYFER_WORKSPACE}:/home/jovyan'
 
-    kallisto_service:
-        container_name: 'kallisto'
-        environment:
-            BLAZEGRAPH_UID: '${BLAZEGRAPH_UID}'
-            BLAZEGRAPH_GID: '${BLAZEGRAPH_GID}'
-        image: '${KALLISTO_IMAGE}'
-        ports:
-            # - '127.0.0.1:8809:9999'
-            - '0.0.0.0:${KALLISTO_PORT}:9999'
-        privileged: true
-        volumes:
-            - '${KALLISTO_DATA}:/var/blazegraph/data'
-
