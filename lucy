@@ -12,7 +12,7 @@ LUCYFER_GITHUB_FILES=(
     "README-Kotlin.ipynb"
     "lucy" )
 LUCYFER_GITHUB_PATH="https://raw.githubusercontent.com/pr3d4t0r/lucyfer/master"
-LUCYFER_HUB_VERSION="3.6.6"
+LUCYFER_HUB_VERSION="3.6.7"
 
 
 # *** functions ***
@@ -115,8 +115,6 @@ setOwnership() {
     #
     # Documented method because Docker permissions and ownership
     # kinda suck.
-    export BLAZEGRAPH_GID=$(id -g)
-    export BLAZEGRAPH_UID=$(id -u)
     export JUPYTER_LAB_GID=$(id -g)
     export JUPYTER_LAB_UID=$(id -u)
 } # setOwnership
